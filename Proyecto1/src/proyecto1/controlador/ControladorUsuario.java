@@ -9,13 +9,38 @@ import proyecto1.modelo.Usuario;
  */
 public class ControladorUsuario {
     
-    static ArrayList<Usuario> arrayUser = new ArrayList<Usuario>();
+    static ArrayList<Usuario> arrayUser = new ArrayList<>();
     Usuario user = new Usuario();
     
     public void CrearAdmin() {
         arrayUser.add(new Usuario());
-        System.out.println(arrayUser.get(0).getCorreo());
-        System.out.println(arrayUser.get(0).getRol());
+    }
+    
+    public boolean VerificarUsuario(String correo, String pass) {
+        
+        for (Usuario u: arrayUser) {
+            if(u.getCorreo().equals(correo) && u.getPassword().equals(pass)) {
+                System.out.println("Bienvenido "+u.getCorreo());
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public void RegistrarUsuario(String correo, String nombre, String apellido, String password, String dpi, String fechaC, String genero, String nacionalidad, String usuario, String telefono, String rol, String foto) {
+        boolean usuarioCreado = false;
+        for (Usuario u: arrayUser) {
+            if(u.getCorreo().equals(correo)) {
+                usuarioCreado = true;
+            }
+        }
+        
+        if(!usuarioCreado) {
+            arrayUser.add(new Usuario(correo, nombre, apellido, password, dpi, fechaC, genero, nacionalidad, usuario, telefono, rol, foto));
+        }
+        
+
     }
     
     
