@@ -25,9 +25,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
     ImageIcon image;
     public RegistroUsuario() {
         initComponents();
-        lblImagen.setVisible(false);
-        btnImagen.setVisible(false);
-        lblIma.setVisible(false);
         setImageLabel(lblIma, "src/img/usuario.png");
         asignarNacionalidades();
         setTitle("Registro de usuario");
