@@ -20,7 +20,6 @@ public class ControladorUsuario {
         
         for (Usuario u: arrayUser) {
             if(u.getCorreo().equals(correo) && u.getPassword().equals(pass)) {
-                System.out.println("Bienvenido "+u.getCorreo());
                 return true;
             }
         }

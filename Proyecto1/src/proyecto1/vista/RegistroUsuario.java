@@ -11,6 +11,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,8 +27,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
     public RegistroUsuario() {
         initComponents();
         setImageLabel(lblIma, "src/img/usuario.png");
-        asignarNacionalidades();
+        asignarItems();
         setTitle("Registro de usuario");
+        lblKiosco.setVisible(false);
+        cmbKiosco.setVisible(false);
+        setVisibleLbl(false);
     }
 
     /**
@@ -72,10 +76,23 @@ public class RegistroUsuario extends javax.swing.JFrame {
         btnImagen = new javax.swing.JButton();
         lblIma = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel14 = new javax.swing.JLabel();
+        cmbRol = new javax.swing.JComboBox<>();
+        cmbKiosco = new javax.swing.JComboBox<>();
+        lblKiosco = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        lblRNombre = new javax.swing.JLabel();
+        lblRApellido = new javax.swing.JLabel();
+        lblRDPI = new javax.swing.JLabel();
+        lblRCorreo = new javax.swing.JLabel();
+        lblRUsuario = new javax.swing.JLabel();
+        lblRTele = new javax.swing.JLabel();
+        lblRContra = new javax.swing.JLabel();
+        lblRPass = new javax.swing.JLabel();
+        lblRRol = new javax.swing.JLabel();
+        lblRFecha = new javax.swing.JLabel();
+        lblRGenero = new javax.swing.JLabel();
+        lblRNacionalidad = new javax.swing.JLabel();
+        lblCampos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -129,6 +146,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
         btnRegistrar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnRegistrarFocusLost(evt);
+            }
+        });
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
@@ -151,11 +173,75 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
         jLabel13.setText("Rol");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbRol.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbRolItemStateChanged(evt);
+            }
+        });
+        cmbRol.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cmbRolFocusLost(evt);
+            }
+        });
+        cmbRol.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cmbRolMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmbRolMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cmbRolMousePressed(evt);
+            }
+        });
+        cmbRol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbRolActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbKiosco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel14.setText("Kioscos");
+        lblKiosco.setText("Kioscos");
+
+        lblRNombre.setForeground(new java.awt.Color(255, 0, 0));
+        lblRNombre.setText("*");
+
+        lblRApellido.setForeground(new java.awt.Color(255, 0, 0));
+        lblRApellido.setText("*");
+
+        lblRDPI.setForeground(new java.awt.Color(255, 0, 0));
+        lblRDPI.setText("*");
+
+        lblRCorreo.setForeground(new java.awt.Color(255, 0, 0));
+        lblRCorreo.setText("*");
+
+        lblRUsuario.setForeground(new java.awt.Color(255, 0, 0));
+        lblRUsuario.setText("*");
+
+        lblRTele.setForeground(new java.awt.Color(255, 0, 0));
+        lblRTele.setText("*");
+
+        lblRContra.setForeground(new java.awt.Color(255, 0, 0));
+        lblRContra.setText("*");
+
+        lblRPass.setForeground(new java.awt.Color(255, 0, 0));
+        lblRPass.setText("*");
+
+        lblRRol.setForeground(new java.awt.Color(255, 0, 0));
+        lblRRol.setText("*");
+
+        lblRFecha.setForeground(new java.awt.Color(255, 0, 0));
+        lblRFecha.setText("*");
+
+        lblRGenero.setForeground(new java.awt.Color(255, 0, 0));
+        lblRGenero.setText("*");
+
+        lblRNacionalidad.setForeground(new java.awt.Color(255, 0, 0));
+        lblRNacionalidad.setText("*");
+
+        lblCampos.setForeground(new java.awt.Color(255, 0, 0));
+        lblCampos.setText("* Campos requeridos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,45 +258,64 @@ public class RegistroUsuario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblRNombre))
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel2)
                                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txtApellido)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblRApellido))
+                                    .addComponent(txtApellido)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblRDPI, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblRCorreo, javax.swing.GroupLayout.Alignment.TRAILING)))))
                             .addComponent(txtDPI)
                             .addComponent(txtCorreo)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblRContra))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel8)
-                                        .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                                        .addComponent(txtPass))
-                                    .addComponent(jLabel13)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblRUsuario))
+                                    .addComponent(txtUsuario)
+                                    .addComponent(txtPass)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblRRol))
+                                    .addComponent(cmbRol, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(24, 24, 24)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel9)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblRTele))
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtRPass)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                                    .addComponent(lblKiosco)
+                                    .addComponent(cmbKiosco, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblRPass)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(opMujer)
-                                            .addGap(39, 39, 39)
-                                            .addComponent(opHombre))
                                         .addComponent(cmbNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel12)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -221,7 +326,21 @@ public class RegistroUsuario extends javax.swing.JFrame {
                                                     .addComponent(txtMes))
                                                 .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lblRFecha)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblRGenero)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(opMujer)
+                                                .addGap(39, 39, 39)
+                                                .addComponent(opHombre)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblCampos)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel12)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(lblRNacionalidad))))
                                     .addGap(75, 75, 75))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(lblImagen)
@@ -252,14 +371,18 @@ public class RegistroUsuario extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(lblRFecha))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(lblRGenero))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(opMujer)
@@ -267,7 +390,9 @@ public class RegistroUsuario extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
-                                .addComponent(jLabel12)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(lblRNacionalidad))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cmbNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -276,25 +401,37 @@ public class RegistroUsuario extends javax.swing.JFrame {
                                 .addGap(105, 105, 105)
                                 .addComponent(lblIma, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)
+                                .addComponent(lblRApellido))
+                            .addComponent(lblRNombre, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(lblRDPI, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtDPI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lblRCorreo)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel9))
+                            .addComponent(jLabel9)
+                            .addComponent(lblRUsuario)
+                            .addComponent(lblRTele))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,7 +439,9 @@ public class RegistroUsuario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(lblRContra)
+                            .addComponent(lblRPass))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -311,13 +450,16 @@ public class RegistroUsuario extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(jLabel14))
+                            .addComponent(lblKiosco)
+                            .addComponent(lblRRol))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cmbRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbKiosco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(34, 34, 34)
                 .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblCampos)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -329,7 +471,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_opMujerActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
+        if (!txtNombre.getText().isEmpty() && !txtApellido.getText().isEmpty() && !txtDPI.getText().isEmpty() && !txtCorreo.getText().isEmpty() && !txtUsuario.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtPass.getText().isEmpty() && !txtRPass.getText().isEmpty() && cmbRol.getSelectedIndex() != 0 && !txtDia.getText().isEmpty() && !txtMes.getText().isEmpty() && !txtAnio.getText().isEmpty() && cmbNacionalidad.getSelectedIndex() != 0 && (opMujer.isSelected() || opHombre.isSelected()) ) {
+            
+        } else {
+            setVisibleLbl(true);
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
@@ -347,13 +493,70 @@ public class RegistroUsuario extends javax.swing.JFrame {
         vistaLogin.setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void asignarNacionalidades() {
-        //cmbNacionalidad.setText("Selecciona una opción:");
+    private void cmbRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRolActionPerformed
+        if(cmbRol.getSelectedItem().equals("Kiosco")) {
+            lblKiosco.setVisible(true);
+            cmbKiosco.setVisible(true);
+        }else {
+            lblKiosco.setVisible(false);
+            cmbKiosco.setVisible(false);
+        }
+    }//GEN-LAST:event_cmbRolActionPerformed
+
+    private void cmbRolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbRolMouseClicked
+        
+        
+    }//GEN-LAST:event_cmbRolMouseClicked
+
+    private void cmbRolItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbRolItemStateChanged
+
+    }//GEN-LAST:event_cmbRolItemStateChanged
+
+    private void cmbRolMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbRolMouseExited
+        
+    }//GEN-LAST:event_cmbRolMouseExited
+
+    private void cmbRolMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbRolMousePressed
+
+    }//GEN-LAST:event_cmbRolMousePressed
+
+    private void cmbRolFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbRolFocusLost
+        if(cmbRol.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Debes seleccionar una opción valida en el rol.");
+        }
+    }//GEN-LAST:event_cmbRolFocusLost
+
+    private void btnRegistrarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnRegistrarFocusLost
+        setVisibleLbl(false);
+    }//GEN-LAST:event_btnRegistrarFocusLost
+
+    private void asignarItems() {
+        cmbNacionalidad.addItem("Seleccione una opción");
         cmbNacionalidad.addItem("guatemalteco");
         cmbNacionalidad.addItem("salvadoreño");
         cmbNacionalidad.addItem("hondureño");
         cmbNacionalidad.addItem("nicaragüense");
         cmbNacionalidad.addItem("costarricense");
+        
+        cmbRol.addItem("Seleccione una opción");
+        cmbRol.addItem("Individual");
+        cmbRol.addItem("Kiosco");
+    }
+    
+    private void setVisibleLbl(boolean bln) {
+        lblCampos.setVisible(bln);
+        lblRNombre.setVisible(bln);
+        lblRApellido.setVisible(bln);
+        lblRCorreo.setVisible(bln);
+        lblRDPI.setVisible(bln);
+        lblRUsuario.setVisible(bln);
+        lblRTele.setVisible(bln);
+        lblRRol.setVisible(bln);
+        lblRContra.setVisible(bln);
+        lblRPass.setVisible(bln);
+        lblRFecha.setVisible(bln);
+        lblRGenero.setVisible(bln);
+        lblRNacionalidad.setVisible(bln);
     }
     
     private void setImageLabel(JLabel labelName, String root) {
@@ -402,15 +605,14 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnImagen;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> cmbKiosco;
     private javax.swing.JComboBox<String> cmbNacionalidad;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> cmbRol;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -420,8 +622,22 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblCampos;
     private javax.swing.JLabel lblIma;
     private javax.swing.JLabel lblImagen;
+    private javax.swing.JLabel lblKiosco;
+    private javax.swing.JLabel lblRApellido;
+    private javax.swing.JLabel lblRContra;
+    private javax.swing.JLabel lblRCorreo;
+    private javax.swing.JLabel lblRDPI;
+    private javax.swing.JLabel lblRFecha;
+    private javax.swing.JLabel lblRGenero;
+    private javax.swing.JLabel lblRNacionalidad;
+    private javax.swing.JLabel lblRNombre;
+    private javax.swing.JLabel lblRPass;
+    private javax.swing.JLabel lblRRol;
+    private javax.swing.JLabel lblRTele;
+    private javax.swing.JLabel lblRUsuario;
     private javax.swing.JRadioButton opHombre;
     private javax.swing.JRadioButton opMujer;
     private javax.swing.JTextField txtAnio;
