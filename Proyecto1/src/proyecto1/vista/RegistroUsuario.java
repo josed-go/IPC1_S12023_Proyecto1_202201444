@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import proyecto1.controlador.ControladorUsuario;
 
 /**
  *
@@ -23,10 +24,14 @@ public class RegistroUsuario extends javax.swing.JFrame {
      * Creates new form RegistroUsuario
      */
     JFileChooser fc = new JFileChooser();
+    ControladorUsuario controladorUsuario = new ControladorUsuario();
+    Login vistaLogin = new Login();
     ImageIcon image;
+    
+    String imageUser = "src/img/usuario.png";
     public RegistroUsuario() {
         initComponents();
-        setImageLabel(lblIma, "src/img/usuario.png");
+        setImageLabel(lblIma, imageUser);
         asignarItems();
         setTitle("Registro de usuario");
         lblKiosco.setVisible(false);
@@ -471,8 +476,30 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_opMujerActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        String fecha;
+        String genero;
         if (!txtNombre.getText().isEmpty() && !txtApellido.getText().isEmpty() && !txtDPI.getText().isEmpty() && !txtCorreo.getText().isEmpty() && !txtUsuario.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtPass.getText().isEmpty() && !txtRPass.getText().isEmpty() && cmbRol.getSelectedIndex() != 0 && !txtDia.getText().isEmpty() && !txtMes.getText().isEmpty() && !txtAnio.getText().isEmpty() && cmbNacionalidad.getSelectedIndex() != 0 && (opMujer.isSelected() || opHombre.isSelected()) ) {
-            
+            if(controladorUsuario.ValidarPassword(txtPass.getText())) {
+                fecha = txtDia.getText()+"-"+txtMes.getText()+"-"+txtAnio.getText();
+                
+                if(opMujer.isSelected()){
+                    genero = opMujer.getText();
+                } else {
+                    genero = opHombre.getText();
+                }
+                
+                if(txtPass.getText().equals(txtRPass.getText())) {
+                    controladorUsuario.RegistrarUsuario(txtCorreo.getText(), txtNombre.getText(), txtApellido.getText(), txtPass.getText(), txtDPI.getText(), fecha, genero, (String)cmbNacionalidad.getSelectedItem(), txtUsuario.getText(), txtTelefono.getText(), (String)cmbRol.getSelectedItem(), imageUser);
+                    JOptionPane.showMessageDialog(this, "Usuario creado.");
+                    this.setVisible(false);
+                    vistaLogin.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.");
+                }
+                
+            }else {
+                JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos una Mayuscula, minuscula, numero, caracter especial.");
+            }
         } else {
             setVisibleLbl(true);
         }
@@ -482,14 +509,14 @@ public class RegistroUsuario extends javax.swing.JFrame {
         fc.setDialogTitle("Buscar foto");
         
         if(fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            imageUser = fc.getSelectedFile().toString();
             lblIma.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-            setImageLabel(lblIma, fc.getSelectedFile().toString());
+            setImageLabel(lblIma, imageUser);
         }
     }//GEN-LAST:event_btnImagenActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.setVisible(false);
-        Login vistaLogin = new Login();
         vistaLogin.setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
