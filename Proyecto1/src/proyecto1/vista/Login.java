@@ -98,11 +98,13 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel2)
-                                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(27, 27, 27)
                                     .addComponent(chkMostrar))
-                                .addComponent(txtPass))))
+                                .addComponent(txtPass)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(8, 8, 8)
+                                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(214, 214, 214)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -129,9 +131,9 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkMostrar)
-                .addGap(28, 28, 28)
-                .addComponent(btnLogin)
                 .addGap(18, 18, 18)
+                .addComponent(btnLogin)
+                .addGap(28, 28, 28)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
@@ -145,7 +147,9 @@ public class Login extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if (!txtCorreo.getText().isEmpty() && !txtPass.getText().isEmpty()) {
             if(user.VerificarUsuario(txtCorreo.getText(), txtPass.getText())){
-                System.out.println("true");
+                this.setVisible(false);
+                MenuPrincipal menu = new MenuPrincipal();
+                menu.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.");
             }
