@@ -489,10 +489,14 @@ public class RegistroUsuario extends javax.swing.JFrame {
                 }
                 
                 if(txtPass.getText().equals(txtRPass.getText())) {
-                    controladorUsuario.RegistrarUsuario(txtCorreo.getText(), txtNombre.getText(), txtApellido.getText(), txtPass.getText(), txtDPI.getText(), fecha, genero, (String)cmbNacionalidad.getSelectedItem(), txtUsuario.getText(), txtTelefono.getText(), (String)cmbRol.getSelectedItem(), imageUser);
-                    JOptionPane.showMessageDialog(this, "Usuario creado.");
-                    this.setVisible(false);
-                    vistaLogin.setVisible(true);
+                    if(!controladorUsuario.RegistrarUsuario(txtCorreo.getText(), txtNombre.getText(), txtApellido.getText(), txtPass.getText(), txtDPI.getText(), fecha, genero, (String)cmbNacionalidad.getSelectedItem(), txtUsuario.getText(), txtTelefono.getText(), (String)cmbRol.getSelectedItem(), imageUser)){
+                        JOptionPane.showMessageDialog(this, "Usuario creado.");
+                        this.setVisible(false);
+                        vistaLogin.setVisible(true);
+                    }else {
+                        JOptionPane.showMessageDialog(this, "Ya existe un usuario con ese correo");
+                    }
+                    
                 } else {
                     JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.");
                 }

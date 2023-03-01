@@ -27,7 +27,7 @@ public class ControladorUsuario {
         return false;
     }
     
-    public void RegistrarUsuario(String correo, String nombre, String apellido, String password, String dpi, String fechaC, String genero, String nacionalidad, String usuario, String telefono, String rol, String foto) {
+    public boolean RegistrarUsuario(String correo, String nombre, String apellido, String password, String dpi, String fechaC, String genero, String nacionalidad, String usuario, String telefono, String rol, String foto) {
         boolean usuarioCreado = false;
         for (Usuario u: arrayUser) {
             if(u.getCorreo().equals(correo)) {
@@ -37,7 +37,10 @@ public class ControladorUsuario {
         
         if(!usuarioCreado) {
             arrayUser.add(new Usuario(correo, nombre, apellido, password, dpi, fechaC, genero, nacionalidad, usuario, telefono, rol, foto));
+            return usuarioCreado;
         }
+        
+        return usuarioCreado;
     }
     
     public boolean ValidarPassword(String pass) {
