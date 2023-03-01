@@ -163,6 +163,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         });
 
         btnRegresar.setText("REGRESAR");
+        btnRegresar.setFocusPainted(false);
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
