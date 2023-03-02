@@ -285,7 +285,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pnKioscoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnKioscoMouseClicked
-        System.out.println("Clicked kioscos");
+        this.setVisible(false);
+        KioscoVista vistaK = new KioscoVista();
+        vistaK.setVisible(true);
     }//GEN-LAST:event_pnKioscoMouseClicked
 
     private void pnKioscoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnKioscoMouseEntered
