@@ -42,6 +42,16 @@ public class ControladorKiosco {
         }
     }
     
+    public Kiosco KioscoSeleccionado(String codigo) {
+        for(Kiosco k: arrayKiosco) {
+            if(k.getCodigo().equals(codigo)) {
+                return k;
+            }
+        }
+        
+        return null;
+    }
+    
     public ArrayList<Kiosco> ObtenerKioscos() {
         return arrayKiosco;
     }
