@@ -9,7 +9,7 @@ import proyecto1.modelo.Kiosco;
  */
 public class ControladorKiosco {
     
-    ArrayList<Kiosco> arrayKiosco = new ArrayList<>();
+    static ArrayList<Kiosco> arrayKiosco = new ArrayList<>();
     
     public boolean AgregarKiosco(String codigo, String nombre, String region) {
         
@@ -42,13 +42,12 @@ public class ControladorKiosco {
         }
     }
     
-    public Kiosco KioscoSeleccionado(String codigo) {
+    public Kiosco ValidarSeleccion(String codigo) {
         for(Kiosco k: arrayKiosco) {
             if(k.getCodigo().equals(codigo)) {
-                return k;
+               return k;
             }
         }
-        
         return null;
     }
     

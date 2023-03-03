@@ -4,6 +4,10 @@
  */
 package proyecto1.vista;
 
+import javax.swing.JOptionPane;
+import proyecto1.controlador.ControladorKiosco;
+import proyecto1.controlador.ControladorRegion;
+
 
 /**
  *
@@ -15,8 +19,14 @@ public class AccionesKiosco extends javax.swing.JFrame {
      * Creates new form AccionesKiosco
      */
     
+    ControladorKiosco controladorK = new ControladorKiosco();
+    ControladorRegion controladorR = new ControladorRegion();
+    KioscoVista vistaK = new KioscoVista();
+    
     public AccionesKiosco() {
         initComponents();
+        DatosRegion();
+        
     }
 
     /**
@@ -29,7 +39,7 @@ public class AccionesKiosco extends javax.swing.JFrame {
     private void initComponents() {
 
         lblTitulo = new javax.swing.JLabel();
-        btnAgregar = new javax.swing.JButton();
+        btnAccion = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
@@ -45,8 +55,13 @@ public class AccionesKiosco extends javax.swing.JFrame {
         lblTitulo.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblTitulo.setText("AGREGAR");
 
-        btnAgregar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnAgregar.setText("AGREGAR");
+        btnAccion.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnAccion.setText("AGREGAR");
+        btnAccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAccionActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnCancelar.setText("CANCELAR");
@@ -64,8 +79,6 @@ public class AccionesKiosco extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setText("CÓDIGO REGIÓN");
-
-        cmbRegion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,7 +104,7 @@ public class AccionesKiosco extends javax.swing.JFrame {
                                     .addComponent(lblTitulo)
                                     .addGap(181, 181, 181))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(btnAgregar)
+                                    .addComponent(btnAccion)
                                     .addGap(102, 102, 102)
                                     .addComponent(btnCancelar)
                                     .addGap(81, 81, 81)))))))
@@ -117,7 +130,7 @@ public class AccionesKiosco extends javax.swing.JFrame {
                 .addComponent(cmbRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar)
+                    .addComponent(btnAccion)
                     .addComponent(btnCancelar))
                 .addGap(48, 48, 48))
         );
@@ -127,15 +140,51 @@ public class AccionesKiosco extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
+        vistaK.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccionActionPerformed
+         if(btnAccion.getText().equals("AGREGAR")) {
+            if(ValidarTextField()) {
+                controladorK.AgregarKiosco(txtCodigo.getText(), txtNombre.getText(), (String)cmbRegion.getSelectedItem());
+                JOptionPane.showMessageDialog(this, "Kiosco agregado.");
+                this.setVisible(false);
+                vistaK.RellenarTabla();
+                vistaK.setVisible(true);
+            }            
+        } else if(btnAccion.getText().equals("EDITAR")) {
+            
+        }
+    }//GEN-LAST:event_btnAccionActionPerformed
+
+    private boolean ValidarTextField() {
+        if(txtCodigo.getText().isEmpty() || txtNombre.getText().isEmpty() || cmbRegion.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Debes rellenar todos los campos.");
+            return false;
+        }
+        return true;
+    }
+    
+    private void DatosRegion() {
+        cmbRegion.addItem("SELECCIONA UNA REGIÓN");
+        for(int i=0; i < controladorR.ObtenerRegiones().size(); i++) {
+            cmbRegion.addItem(controladorR.ObtenerRegiones().get(i).getCodigo());
+        }
+    }
+    
     public void Tipo(String tipo) {
         if(tipo.equals("AGREGAR")) {
             lblTitulo.setText("AGREGAR");
         } else if(tipo.equals("EDITAR")) {
             lblTitulo.setText("EDITAR");
         }
+    }
+    
+    public void TextoEditar(String codigo) {
+        txtCodigo.setText(controladorK.ValidarSeleccion(codigo).getCodigo());
+        txtNombre.setText(controladorK.ValidarSeleccion(codigo).getNombre());
+        cmbRegion.setSelectedItem(controladorK.ValidarSeleccion(codigo).getCodigoRegion());
     }
     
     /**
@@ -174,7 +223,7 @@ public class AccionesKiosco extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAccion;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox<String> cmbRegion;
     private javax.swing.JLabel jLabel1;

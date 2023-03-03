@@ -22,9 +22,9 @@ public class KioscoVista extends javax.swing.JFrame {
     
     public KioscoVista() {
         initComponents();
-        agregarKiosko();
         RellenarTabla();
         btnCancelar.setVisible(false);
+        tableK.repaint();
     }
 
     /**
@@ -37,7 +37,7 @@ public class KioscoVista extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableK = new javax.swing.JTable();
@@ -50,11 +50,11 @@ public class KioscoVista extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel1.setText("MANEJO DE KIOSCOS");
 
-        jButton1.setText("REGRESAR");
-        jButton1.setFocusPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setText("REGRESAR");
+        btnRegresar.setFocusPainted(false);
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
 
@@ -112,16 +112,16 @@ public class KioscoVista extends javax.swing.JFrame {
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(24, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnRegresar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(130, 130, 130))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnCancelar)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(98, 98, 98)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnCancelar)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(274, 274, 274)
@@ -137,7 +137,7 @@ public class KioscoVista extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jButton1)))
+                        .addComponent(btnRegresar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
@@ -153,11 +153,11 @@ public class KioscoVista extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.setVisible(false);
         MenuPrincipal menu = new MenuPrincipal();
         menu.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void tableKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableKMouseClicked
         if(tableK.getSelectedRow() >= 0) {
@@ -178,19 +178,27 @@ public class KioscoVista extends javax.swing.JFrame {
     private void btnActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionActionPerformed
         AccionesKiosco accionesK = new AccionesKiosco();
         accionesK.Tipo(btnAction.getText());
+        
+        this.setVisible(false);
+        
         if(btnAction.getText().equals("AGREGAR")) {
             accionesK.setVisible(true);
         } else if (btnAction.getText().equals("EDITAR")) {
-            controladorK.KioscoSeleccionado((String)tableK.getValueAt(tableK.getSelectedRow(), 2));
+            //controladorK.ValidarSeleccion((String)tableK.getValueAt(tableK.getSelectedRow(), 1));
+            accionesK.TextoEditar((String)tableK.getValueAt(tableK.getSelectedRow(), 1));
             accionesK.setVisible(true);
         }
     }//GEN-LAST:event_btnActionActionPerformed
-
+    
     public String ObtenerTextButton() {
         return btnAction.getText();
     }
     
-    private void RellenarTabla() {
+    public String CodigoKiosco() {
+        return (String)tableK.getValueAt(tableK.getSelectedRow(), 1);
+    }
+    
+    public void RellenarTabla() {
         DefaultTableModel modelo = new DefaultTableModel(new String[]{"NO.", "CÓDIGO", "NOMBRE", "REGIÓN"}, controladorK.ObtenerKioscos().size());
         tableK.setModel(modelo);
         
@@ -202,16 +210,6 @@ public class KioscoVista extends javax.swing.JFrame {
             modeloDatos.setValueAt(kiosko.getNombre(), i, 2);
             modeloDatos.setValueAt(kiosko.getCodigoRegion(), i, 3);
         }        
-    }
-    
-    private void agregarKiosko() {
-        controladorK.AgregarKiosco("LBD", "ajksdljnad", "adsad");
-        controladorK.AgregarKiosco("LaD", "aADSDljnad", "aJJNad");
-        controladorK.AgregarKiosco("LFD", "ajTHGHnad", "adsTYd");
-        controladorK.AgregarKiosco("LHD", "ajTHGHnad", "adsTYd");
-        controladorK.AgregarKiosco("LGD", "ajTHGHnad", "adsTYd");
-        controladorK.AgregarKiosco("LJD", "ajTHGHnad", "adsTYd");
-        controladorK.AgregarKiosco("LUD", "ajTHGHnad", "adsTYd");  
     }
     
     /**
@@ -252,10 +250,10 @@ public class KioscoVista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAction;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable tableK;
+    public javax.swing.JTable tableK;
     // End of variables declaration//GEN-END:variables
 }
