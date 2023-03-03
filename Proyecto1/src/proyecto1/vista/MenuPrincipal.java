@@ -120,6 +120,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnRegiones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(21, 35, 61), 2));
         pnRegiones.setPreferredSize(new java.awt.Dimension(133, 133));
         pnRegiones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnRegionesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnRegionesMouseEntered(evt);
             }
@@ -327,6 +330,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Login login = new Login();
         login.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void pnRegionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnRegionesMouseClicked
+        this.setVisible(false);
+        RegionVista vistaR = new RegionVista();
+        vistaR.setVisible(true);
+    }//GEN-LAST:event_pnRegionesMouseClicked
 
     private void setImageLabel(JLabel labelName, String root) {
         image = new ImageIcon(root);
