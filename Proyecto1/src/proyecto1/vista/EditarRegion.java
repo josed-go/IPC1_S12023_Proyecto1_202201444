@@ -151,11 +151,16 @@ public class EditarRegion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        controladorR.EditarPrecio(txtCodigo.getText(), Double.parseDouble(txtPEstandar.getText()), Double.parseDouble(txtPEspecial.getText()));
-        JOptionPane.showMessageDialog(this, "Región editada.");
-        this.setVisible(false);
-        vistaR.LlenarTabla();
-        vistaR.setVisible(true);
+        if(!txtPEstandar.getText().isEmpty() && !txtPEspecial.getText().isEmpty() && Integer.parseInt(txtPEstandar.getText()) > 0 && Integer.parseInt(txtPEspecial.getText()) > 0 ) {
+            controladorR.EditarPrecio(txtCodigo.getText(), Double.parseDouble(txtPEstandar.getText()), Double.parseDouble(txtPEspecial.getText()));
+            JOptionPane.showMessageDialog(this, "Región editada.");
+            this.setVisible(false);
+            vistaR.LlenarTabla();
+            vistaR.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Debes rellenar todos los campos.");
+        }
+        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
