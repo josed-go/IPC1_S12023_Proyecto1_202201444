@@ -44,4 +44,13 @@ public class ControladorRegion {
         return arrayRegion;
     }
     
+    public Region ObtenerRegionSeleccionada(String codigo) {
+        for(Region r: arrayRegion) {
+            if(r.getCodigo().equals(codigo)) {
+               return r;
+            }
+        }
+        return null;
+    }
+    
 }

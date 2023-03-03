@@ -25,6 +25,7 @@ public class RegionVista extends javax.swing.JFrame {
         initComponents();
         LlenarTabla();
         btnCancelar.setVisible(false);
+        btnEditar.setVisible(false);
     }
 
     /**
@@ -41,7 +42,7 @@ public class RegionVista extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableR = new javax.swing.JTable();
-        btnAction = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,11 +93,12 @@ public class RegionVista extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableR);
 
-        btnAction.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnAction.setText("AGREGAR");
-        btnAction.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnEditar.setText("EDITAR");
+        btnEditar.setToolTipText("");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActionActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
@@ -112,10 +114,6 @@ public class RegionVista extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(274, 274, 274)
-                .addComponent(btnAction)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
@@ -129,7 +127,10 @@ public class RegionVista extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnCancelar)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(255, 255, 255)
+                        .addComponent(btnEditar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -148,9 +149,9 @@ public class RegionVista extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar)
-                .addGap(18, 18, 18)
-                .addComponent(btnAction)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEditar)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -169,29 +170,25 @@ public class RegionVista extends javax.swing.JFrame {
 
     private void tableRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableRMouseClicked
         if(tableR.getSelectedRow() >= 0) {
-            btnAction.setText("EDITAR");
+            btnEditar.setVisible(true);
             btnCancelar.setVisible(true);
         }
     }//GEN-LAST:event_tableRMouseClicked
 
-    private void btnActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionActionPerformed
-        /*AccionesKiosco accionesK = new AccionesKiosco();
-        accionesK.Tipo(btnAction.getText());
-        if(btnAction.getText().equals("AGREGAR")) {
-            accionesK.setVisible(true);
-        } else if (btnAction.getText().equals("EDITAR")) {
-            controladorK.KioscoSeleccionado((String)tableK.getValueAt(tableK.getSelectedRow(), 2));
-            accionesK.setVisible(true);
-        }*/
-    }//GEN-LAST:event_btnActionActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        EditarRegion editar = new EditarRegion();
+        this.setVisible(false);
+        editar.setVisible(true);
+        editar.DatosTextField((String)tableR.getValueAt(tableR.getSelectedRow(), 1));
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        btnAction.setText("AGREGAR");
+        btnEditar.setVisible(false);
         btnCancelar.setVisible(false);
         tableR.clearSelection();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void LlenarTabla() {
+    public void LlenarTabla() {
         DefaultTableModel modelo = new DefaultTableModel(new String[]{"NO.", "CÓDIGO", "NOMBRE", "PRECIO ESTANDAR", "PRECIO ESPECIAL"}, controladorR.ObtenerRegiones().size());
         tableR.setModel(modelo);
         
@@ -243,8 +240,8 @@ public class RegionVista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAction;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
