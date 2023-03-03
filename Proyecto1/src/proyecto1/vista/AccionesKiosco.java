@@ -23,6 +23,8 @@ public class AccionesKiosco extends javax.swing.JFrame {
     ControladorRegion controladorR = new ControladorRegion();
     KioscoVista vistaK = new KioscoVista();
     
+    String codigoE;
+    
     public AccionesKiosco() {
         initComponents();
         DatosRegion();
@@ -147,14 +149,29 @@ public class AccionesKiosco extends javax.swing.JFrame {
     private void btnAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccionActionPerformed
          if(btnAccion.getText().equals("AGREGAR")) {
             if(ValidarTextField()) {
-                controladorK.AgregarKiosco(txtCodigo.getText(), txtNombre.getText(), (String)cmbRegion.getSelectedItem());
-                JOptionPane.showMessageDialog(this, "Kiosco agregado.");
-                this.setVisible(false);
-                vistaK.RellenarTabla();
-                vistaK.setVisible(true);
+                if(!controladorK.ValidarCodigo(txtCodigo.getText())) {
+                    controladorK.AgregarKiosco(txtCodigo.getText(), txtNombre.getText(), (String)cmbRegion.getSelectedItem());
+                    JOptionPane.showMessageDialog(this, "Kiosco agregado.");
+                    this.setVisible(false);
+                    vistaK.RellenarTabla();
+                    vistaK.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ya existe un kiosco con ese codigo.");
+                }
+                
             }            
         } else if(btnAccion.getText().equals("EDITAR")) {
-            
+            if(ValidarTextField()) {
+                if(!controladorK.ValidarCodigo(txtCodigo.getText()) || codigoE.equals(txtCodigo.getText())) {
+                    controladorK.EditarKiosco(codigoE, txtCodigo.getText(), txtNombre.getText(), (String)cmbRegion.getSelectedItem());
+                    JOptionPane.showMessageDialog(this, "Kiosco editado");
+                    this.setVisible(false);
+                    vistaK.RellenarTabla();
+                    vistaK.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ya existe un kiosco con ese codigo.");
+                }
+            }
         }
     }//GEN-LAST:event_btnAccionActionPerformed
 
@@ -176,8 +193,10 @@ public class AccionesKiosco extends javax.swing.JFrame {
     public void Tipo(String tipo) {
         if(tipo.equals("AGREGAR")) {
             lblTitulo.setText("AGREGAR");
+            btnAccion.setText("AGREGAR");
         } else if(tipo.equals("EDITAR")) {
             lblTitulo.setText("EDITAR");
+            btnAccion.setText("EDITAR");
         }
     }
     
@@ -185,6 +204,7 @@ public class AccionesKiosco extends javax.swing.JFrame {
         txtCodigo.setText(controladorK.ValidarSeleccion(codigo).getCodigo());
         txtNombre.setText(controladorK.ValidarSeleccion(codigo).getNombre());
         cmbRegion.setSelectedItem(controladorK.ValidarSeleccion(codigo).getCodigoRegion());
+        codigoE = codigo;
     }
     
     /**

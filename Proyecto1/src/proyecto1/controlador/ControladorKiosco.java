@@ -30,10 +30,10 @@ public class ControladorKiosco {
         return false;
     }
     
-    public void EditarKiosco(String codigo, String nombre, String region) {
+    public void EditarKiosco(String codigoEditar, String codigo, String nombre, String region) {
         for(Kiosco k: arrayKiosco) {
-            if(k.getCodigo().equals(codigo)) {
-                if(!ValidarCodigo(codigo)) {
+            if(k.getCodigo().equals(codigoEditar)) {
+                if(!ValidarCodigo(codigo) || codigoEditar.equals(codigo)) {
                     k.setCodigo(codigo);
                     k.setNombre(nombre);
                     k.setCodigoRegion(region);
