@@ -194,9 +194,6 @@ public class KioscoVista extends javax.swing.JFrame {
         return btnAction.getText();
     }
     
-    public String CodigoKiosco() {
-        return (String)tableK.getValueAt(tableK.getSelectedRow(), 1);
-    }
     
     public void RellenarTabla() {
         DefaultTableModel modelo = new DefaultTableModel(new String[]{"NO.", "CÓDIGO", "NOMBRE", "REGIÓN"}, controladorK.ObtenerKioscos().size());
