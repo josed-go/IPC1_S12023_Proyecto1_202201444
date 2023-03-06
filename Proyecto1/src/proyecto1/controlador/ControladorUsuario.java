@@ -27,7 +27,7 @@ public class ControladorUsuario {
         return false;
     }
     
-    public boolean RegistrarUsuario(String correo, String nombre, String apellido, String password, String dpi, String fechaC, String genero, String nacionalidad, String usuario, String telefono, String rol, String foto) {
+    public boolean RegistrarUsuario(String correo, String nombre, String apellido, String password, String dpi, String fechaC, String genero, String nacionalidad, String usuario, String telefono, String rol, String foto, String codigoKiosco) {
         boolean usuarioCreado = false;
         for (Usuario u: arrayUser) {
             if(u.getCorreo().equals(correo)) {
@@ -36,7 +36,12 @@ public class ControladorUsuario {
         }
         
         if(!usuarioCreado) {
-            arrayUser.add(new Usuario(correo, nombre, apellido, password, dpi, fechaC, genero, nacionalidad, usuario, telefono, rol, foto));
+            if(rol.equals("Individual")) {
+                arrayUser.add(new Usuario(correo, nombre, apellido, password, dpi, fechaC, genero, nacionalidad, usuario, telefono, rol, foto));
+            } else if(rol.equals("Kiosco")) {
+                arrayUser.add(new Usuario(correo, nombre, apellido, password, dpi, fechaC, genero, nacionalidad, usuario, telefono, rol, foto, codigoKiosco));
+            }
+            
             return usuarioCreado;
         }
         

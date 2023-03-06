@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import proyecto1.controlador.ControladorKiosco;
 import proyecto1.controlador.ControladorUsuario;
 
 /**
@@ -25,6 +26,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
      */
     JFileChooser fc = new JFileChooser();
     ControladorUsuario controladorUsuario = new ControladorUsuario();
+    ControladorKiosco controladorK = new ControladorKiosco();
     Login vistaLogin = new Login();
     ImageIcon image;
     
@@ -33,6 +35,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         initComponents();
         setImageLabel(lblIma, imageUser);
         asignarItems();
+        DatosKiosco();
         setTitle("Registro de usuario");
         lblKiosco.setVisible(false);
         cmbKiosco.setVisible(false);
@@ -205,8 +208,6 @@ public class RegistroUsuario extends javax.swing.JFrame {
                 cmbRolActionPerformed(evt);
             }
         });
-
-        cmbKiosco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblKiosco.setText("Kioscos");
 
@@ -479,35 +480,68 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         String fecha;
         String genero;
-        if (!txtNombre.getText().isEmpty() && !txtApellido.getText().isEmpty() && !txtDPI.getText().isEmpty() && !txtCorreo.getText().isEmpty() && !txtUsuario.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtPass.getText().isEmpty() && !txtRPass.getText().isEmpty() && cmbRol.getSelectedIndex() != 0 && !txtDia.getText().isEmpty() && !txtMes.getText().isEmpty() && !txtAnio.getText().isEmpty() && cmbNacionalidad.getSelectedIndex() != 0 && (opMujer.isSelected() || opHombre.isSelected()) ) {
-            if(controladorUsuario.ValidarPassword(txtPass.getText())) {
-                fecha = txtDia.getText()+"-"+txtMes.getText()+"-"+txtAnio.getText();
+        if(cmbRol.getSelectedItem().equals("Kiosco")) {
+            if (!txtNombre.getText().isEmpty() && !txtApellido.getText().isEmpty() && !txtDPI.getText().isEmpty() && !txtCorreo.getText().isEmpty() && !txtUsuario.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtPass.getText().isEmpty() && !txtRPass.getText().isEmpty() && cmbRol.getSelectedIndex() != 0 && !txtDia.getText().isEmpty() && !txtMes.getText().isEmpty() && !txtAnio.getText().isEmpty() && cmbNacionalidad.getSelectedIndex() != 0 && (opMujer.isSelected() || opHombre.isSelected()) && cmbKiosco.getSelectedIndex() != 0 ) {
+                if(controladorUsuario.ValidarPassword(txtPass.getText())) {
+                    fecha = txtDia.getText()+"-"+txtMes.getText()+"-"+txtAnio.getText();
                 
-                if(opMujer.isSelected()){
-                    genero = opMujer.getText();
-                } else {
-                    genero = opHombre.getText();
-                }
-                
-                if(txtPass.getText().equals(txtRPass.getText())) {
-                    if(!controladorUsuario.RegistrarUsuario(txtCorreo.getText(), txtNombre.getText(), txtApellido.getText(), txtPass.getText(), txtDPI.getText(), fecha, genero, (String)cmbNacionalidad.getSelectedItem(), txtUsuario.getText(), txtTelefono.getText(), (String)cmbRol.getSelectedItem(), imageUser)){
-                        JOptionPane.showMessageDialog(this, "Usuario creado.");
-                        this.setVisible(false);
-                        vistaLogin.setVisible(true);
-                    }else {
-                        JOptionPane.showMessageDialog(this, "Ya existe un usuario con ese correo");
+                    if(opMujer.isSelected()){
+                        genero = opMujer.getText();
+                    } else {
+                        genero = opHombre.getText();
                     }
-                    
-                } else {
-                    JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.");
-                }
                 
-            }else {
-                JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos una Mayuscula, minuscula, numero, caracter especial.");
+                    if(txtPass.getText().equals(txtRPass.getText())) {
+                        if(!controladorUsuario.RegistrarUsuario(txtCorreo.getText(), txtNombre.getText(), txtApellido.getText(), txtPass.getText(), txtDPI.getText(), fecha, genero, (String)cmbNacionalidad.getSelectedItem(), txtUsuario.getText(), txtTelefono.getText(), (String)cmbRol.getSelectedItem(), imageUser, ((String)cmbKiosco.getSelectedItem()))){
+                            JOptionPane.showMessageDialog(this, "Usuario creado.");
+                            this.setVisible(false);
+                            vistaLogin.setVisible(true);
+                        }else {
+                            JOptionPane.showMessageDialog(this, "Ya existe un usuario con ese correo");
+                        }
+                    
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.");
+                    }
+                
+                }else {
+                    JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos una Mayuscula, minuscula, numero, caracter especial.");
+                }
+            } else {
+                setVisibleLbl(true);
             }
         } else {
-            setVisibleLbl(true);
+            if (!txtNombre.getText().isEmpty() && !txtApellido.getText().isEmpty() && !txtDPI.getText().isEmpty() && !txtCorreo.getText().isEmpty() && !txtUsuario.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtPass.getText().isEmpty() && !txtRPass.getText().isEmpty() && cmbRol.getSelectedIndex() != 0 && !txtDia.getText().isEmpty() && !txtMes.getText().isEmpty() && !txtAnio.getText().isEmpty() && cmbNacionalidad.getSelectedIndex() != 0 && (opMujer.isSelected() || opHombre.isSelected()) ) {
+                if(controladorUsuario.ValidarPassword(txtPass.getText())) {
+                    fecha = txtDia.getText()+"-"+txtMes.getText()+"-"+txtAnio.getText();
+                
+                    if(opMujer.isSelected()){
+                        genero = opMujer.getText();
+                    } else {
+                        genero = opHombre.getText();
+                    }
+                
+                    if(txtPass.getText().equals(txtRPass.getText())) {
+                        if(!controladorUsuario.RegistrarUsuario(txtCorreo.getText(), txtNombre.getText(), txtApellido.getText(), txtPass.getText(), txtDPI.getText(), fecha, genero, (String)cmbNacionalidad.getSelectedItem(), txtUsuario.getText(), txtTelefono.getText(), (String)cmbRol.getSelectedItem(), imageUser, ((String)cmbKiosco.getSelectedItem()))){
+                            JOptionPane.showMessageDialog(this, "Usuario creado.");
+                            this.setVisible(false);
+                            vistaLogin.setVisible(true);
+                        }else {
+                            JOptionPane.showMessageDialog(this, "Ya existe un usuario con ese correo");
+                        }
+                    
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.");
+                    }
+                
+                }else {
+                    JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos una Mayuscula, minuscula, numero, caracter especial.");
+                }
+            } else {
+                setVisibleLbl(true);
+            }
         }
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
@@ -573,6 +607,13 @@ public class RegistroUsuario extends javax.swing.JFrame {
         cmbRol.addItem("Seleccione una opción");
         cmbRol.addItem("Individual");
         cmbRol.addItem("Kiosco");
+    }
+    
+    private void DatosKiosco() {
+        cmbKiosco.addItem("SELECCIONA UN KIOSCO");
+        for(int i=0; i < controladorK.ObtenerKioscos().size(); i++) {
+            cmbKiosco.addItem(controladorK.ObtenerKioscos().get(i).getCodigo());
+        }
     }
     
     private void setVisibleLbl(boolean bln) {
