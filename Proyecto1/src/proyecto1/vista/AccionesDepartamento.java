@@ -182,7 +182,6 @@ public class AccionesDepartamento extends javax.swing.JFrame {
             if(ValidarTextField()) {
                 if(!controladorD.ValidarCodigo(txtCodigo.getText()) || codigoE.equals(txtCodigo.getText())) {
                     if(!controladorD.ValidarDepartamento(txtNombre.getText()) || nombreE.equalsIgnoreCase(txtNombre.getText())) {
-                        System.out.println(txtCodigo.getText()+"|"+codigoE+"|"+nombreE);
                         controladorD.EditarDepartamento(codigoE, nombreE, (String)cmbRegion.getSelectedItem(), controladorR.ObtenerRegion((String)cmbRegion.getSelectedItem()), txtNombre.getText(), txtCodigo.getText());
                         JOptionPane.showMessageDialog(this, "Kiosco editado");
                         this.setVisible(false);

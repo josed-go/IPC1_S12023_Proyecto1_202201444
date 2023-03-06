@@ -10,6 +10,7 @@ import proyecto1.modelo.Departamento;
 public class ControladorDepartamento {
     
     static ArrayList<Departamento> arrayDepartamento = new ArrayList<>();
+    static String departamento;
     
     public void DepartamentosPrincipales() {
         arrayDepartamento.add(new Departamento("M","Metropolitana","Guatemala", "01"));
@@ -69,6 +70,16 @@ public class ControladorDepartamento {
     
     public ArrayList<Departamento> ObtenerDepartamento() {
         return arrayDepartamento;
+    }
+    
+    public Departamento ObtenerDepartamentoNombre(String nombre) {
+        for(Departamento d: arrayDepartamento) {
+            if(d.getNombre().equalsIgnoreCase(nombre)) {
+                return d;
+            }
+        }
+        
+        return null;
     }
     
 }

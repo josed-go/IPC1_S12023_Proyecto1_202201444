@@ -7,6 +7,7 @@ package proyecto1.vista;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import proyecto1.controlador.ControladorDepartamento;
+import proyecto1.controlador.ControladorMunicipio;
 import proyecto1.modelo.Departamento;
 
 /**
@@ -19,6 +20,7 @@ public class DepartamentoVista extends javax.swing.JFrame {
      * Creates new form DepartamentoVista
      */
     ControladorDepartamento controladorD = new ControladorDepartamento();
+    ControladorMunicipio controladorM = new ControladorMunicipio();
     
     public DepartamentoVista() {
         initComponents();
@@ -211,7 +213,11 @@ public class DepartamentoVista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnMunicipiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMunicipiosActionPerformed
-        // TODO add your handling code here:
+        controladorM.MunicipiosPorDepartamento((String)tableD.getValueAt(tableD.getSelectedRow(), 0));
+        this.setVisible(false);
+        MunicipioVista vistaM = new MunicipioVista();
+        vistaM.setVisible(true);
+        vistaM.Departamento((String)tableD.getValueAt(tableD.getSelectedRow(), 1));
     }//GEN-LAST:event_btnMunicipiosActionPerformed
 
     public void LlenarTabla() {
