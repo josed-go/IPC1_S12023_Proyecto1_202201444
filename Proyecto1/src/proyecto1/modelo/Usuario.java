@@ -17,6 +17,7 @@ public class Usuario {
     private String telefono;
     private String rol;
     private String foto;
+    private String codigoKiosco;
 
     public Usuario(String correo, String nombre, String apellido, String password, String dpi, String fechaC, String genero, String nacionalidad, String usuario, String telefono, String rol, String foto) {
         this.correo = correo;
@@ -31,6 +32,22 @@ public class Usuario {
         this.telefono = telefono;
         this.rol = rol;
         this.foto = foto;
+    }
+    
+    public Usuario(String correo, String nombre, String apellido, String password, String dpi, String fechaC, String genero, String nacionalidad, String usuario, String telefono, String rol, String foto, String codigoKiosco) {
+        this.correo = correo;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.password = password;
+        this.dpi = dpi;
+        this.fechaC = fechaC;
+        this.genero = genero;
+        this.nacionalidad = nacionalidad;
+        this.usuario = usuario;
+        this.telefono = telefono;
+        this.rol = rol;
+        this.foto = foto;
+        this.codigoKiosco = codigoKiosco;
     }
     
     public Usuario() {
@@ -134,6 +151,14 @@ public class Usuario {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getCodigoKiosco() {
+        return codigoKiosco;
+    }
+
+    public void setCodigoKiosco(String codigoKiosco) {
+        this.codigoKiosco = codigoKiosco;
     }
     
 }
