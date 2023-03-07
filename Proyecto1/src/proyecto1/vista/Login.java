@@ -147,9 +147,16 @@ public class Login extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if (!txtCorreo.getText().isEmpty() && !txtPass.getText().isEmpty()) {
             if(user.VerificarUsuario(txtCorreo.getText(), txtPass.getText())){
-                this.setVisible(false);
-                MenuPrincipal menu = new MenuPrincipal();
-                menu.setVisible(true);
+                if(user.UsuarioLogeado().getRol().equals("ADMIN")) {
+                    this.setVisible(false);
+                    MenuPrincipal menu = new MenuPrincipal();
+                    menu.setVisible(true);
+                } else if(user.UsuarioLogeado().getRol().equals("Individual")) {
+                    this.setVisible(false);
+                    MenuCliente menuC = new MenuCliente();
+                    menuC.setVisible(true);
+                }
+                
             } else {
                 JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.");
             }

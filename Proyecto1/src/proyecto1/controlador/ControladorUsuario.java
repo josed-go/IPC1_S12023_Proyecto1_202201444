@@ -10,7 +10,7 @@ import proyecto1.modelo.Usuario;
 public class ControladorUsuario {
     
     static ArrayList<Usuario> arrayUser = new ArrayList<>();
-    Usuario user = new Usuario();
+    static Usuario userLogeado = new Usuario();
     
     public void CrearAdmin() {
         arrayUser.add(new Usuario());
@@ -20,6 +20,7 @@ public class ControladorUsuario {
         
         for (Usuario u: arrayUser) {
             if(u.getCorreo().equals(correo) && u.getPassword().equals(pass)) {
+                userLogeado = u;
                 return true;
             }
         }
@@ -68,8 +69,10 @@ public class ControladorUsuario {
             return true;
         }
         return false;
+    }    
+    
+    public Usuario UsuarioLogeado() {
+        return userLogeado;
     }
-    
-    
     
 }
