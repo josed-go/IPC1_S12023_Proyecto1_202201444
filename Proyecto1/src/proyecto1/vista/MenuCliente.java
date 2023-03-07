@@ -8,8 +8,10 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import proyecto1.controlador.ControladorDatosFacturacion;
 import proyecto1.controlador.ControladorTarjeta;
 import proyecto1.controlador.ControladorUsuario;
+import proyecto1.modelo.DatosFacturacion;
 import proyecto1.modelo.Tarjetas;
 
 /**
@@ -23,6 +25,7 @@ public class MenuCliente extends javax.swing.JFrame {
      */
     ControladorUsuario controladorU = new ControladorUsuario();
     ControladorTarjeta controladorT = new ControladorTarjeta();
+    ControladorDatosFacturacion controladorDF = new ControladorDatosFacturacion();
     
     public MenuCliente() {
         initComponents();
@@ -34,6 +37,8 @@ public class MenuCliente extends javax.swing.JFrame {
         tabbed.addTab("ENVIOS", panel5);
         controladorT.TarjetasUsuario();
         LlenarTabla();
+        controladorDF.DatosUsuario();
+        LlenarTablaDatos();
     }
 
     /**
@@ -52,6 +57,17 @@ public class MenuCliente extends javax.swing.JFrame {
         tabbed = new javax.swing.JTabbedPane();
         panel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableDF = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtNombreD = new javax.swing.JTextField();
+        txtApellidoD = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtDireccionD = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtNITD = new javax.swing.JTextField();
+        btnAgregarD = new javax.swing.JButton();
         panel3 = new javax.swing.JPanel();
         panel4 = new javax.swing.JPanel();
         panel5 = new javax.swing.JPanel();
@@ -87,23 +103,128 @@ public class MenuCliente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setText("MENU PRINCIPAL");
 
-        jLabel3.setText("PANEL 2");
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel3.setText("DATOS");
+
+        tableDF.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "NO.", "NOMBRE COMPLETO", "DIRECCIÓN", "NIT"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableDF.setEnabled(false);
+        tableDF.setFocusable(false);
+        jScrollPane2.setViewportView(tableDF);
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel8.setText("NOMBRE: ");
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel9.setText("APELLIDO:");
+
+        txtNombreD.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        txtApellidoD.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel10.setText("DIRECCIÓN:");
+
+        txtDireccionD.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel11.setText("NIT:");
+
+        txtNITD.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        btnAgregarD.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnAgregarD.setText("AGREGAR");
+        btnAgregarD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
         panel2Layout.setHorizontalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(370, 370, 370)
-                .addComponent(jLabel3)
-                .addContainerGap(407, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(29, 29, 29)
+                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombreD)
+                            .addComponent(txtApellidoD, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panel2Layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNITD, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panel2Layout.createSequentialGroup()
+                                    .addGap(90, 90, 90)
+                                    .addComponent(jLabel3))
+                                .addGroup(panel2Layout.createSequentialGroup()
+                                    .addGap(41, 41, 41)
+                                    .addComponent(jLabel10)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtDireccionD, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 126, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAgregarD)))
+                .addContainerGap())
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(274, 274, 274)
+                .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(txtNombreD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(txtApellidoD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNITD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(39, 39, 39))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(txtDireccionD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addComponent(btnAgregarD)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         tabbed.addTab("tab2", panel2);
@@ -354,11 +475,16 @@ public class MenuCliente extends javax.swing.JFrame {
             }
             
             if(!controladorT.ValidarTarjeta(txtNumero.getText())) {
-                controladorT.CrearTarjeta(txtNombre.getText(), tipo, txtNumero.getText(), txtFecha.getText());
-                JOptionPane.showMessageDialog(this, "Tarjeta agregada.");
-                LimpiarTextField();
-                controladorT.TarjetasUsuario();
-                LlenarTabla();
+                if(txtNumero.getText().length() >= 8) {
+                    controladorT.CrearTarjeta(txtNombre.getText(), tipo, txtNumero.getText(), txtFecha.getText());
+                    JOptionPane.showMessageDialog(this, "Tarjeta agregada.");
+                    LimpiarTextField();
+                    controladorT.TarjetasUsuario();
+                    LlenarTabla();
+                } else {
+                    JOptionPane.showMessageDialog(this, "El número de tarjeta debe tener mas de 8 digitos.");
+                }
+                
             } else {
                 JOptionPane.showMessageDialog(this, "Ya existe esa tarjeta.");
             }
@@ -368,7 +494,22 @@ public class MenuCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    
+    private void btnAgregarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDActionPerformed
+        if(ValidarCampos()) {
+            if(!controladorDF.ValidarDatos(txtDireccionD.getText())) {
+                controladorDF.AgregarDatos(txtNombreD.getText(), txtApellidoD.getText(), txtDireccionD.getText(), txtNITD.getText());
+                JOptionPane.showMessageDialog(this, "Datos agregados.");
+                LimpiarTextField();
+                controladorDF.DatosUsuario();
+                LlenarTablaDatos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Ya existe esa dirección.");
+            }
+        }else {
+            JOptionPane.showMessageDialog(this, "Debes rellenar todos los campos");
+        }
+    }//GEN-LAST:event_btnAgregarDActionPerformed
+     
     
     // METODOS PARA TARJETAS
     private boolean ValidarTextField() {
@@ -383,6 +524,10 @@ public class MenuCliente extends javax.swing.JFrame {
         txtNumero.setText("");
         txtFecha.setText("");
         tipo.clearSelection();
+        txtNombreD.setText("");
+        txtApellidoD.setText("");
+        txtDireccionD.setText("");
+        txtNITD.setText("");
     }
     
     private void LlenarTabla() {
@@ -397,6 +542,29 @@ public class MenuCliente extends javax.swing.JFrame {
             modeloDatos.setValueAt(tarjeta.getNumero(), i, 2);
             modeloDatos.setValueAt(tarjeta.getTipo(), i, 3);
             modeloDatos.setValueAt(tarjeta.getFecha(), i, 4);
+        }  
+    }
+    
+    // METODOS PARA DATOS FACTURACION
+    
+    private boolean ValidarCampos() {
+        if(!txtNombreD.getText().isEmpty() && !txtApellidoD.getText().isEmpty() && !txtDireccionD.getText().isEmpty() && !txtNITD.getText().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+    
+    private void LlenarTablaDatos() {
+        DefaultTableModel modelo = new DefaultTableModel(new String[]{"NO.", "NOMBRE COMPLETO", "DIRECCIÖN", "NIT"}, controladorDF.ObtenerDatos().size());
+        tableDF.setModel(modelo);
+        
+        TableModel modeloDatos = tableDF.getModel();
+        for(int i = 0; i < controladorDF.ObtenerDatos().size(); i++) {
+            DatosFacturacion datos = controladorDF.ObtenerDatos().get(i);
+            modeloDatos.setValueAt(i+1, i, 0);
+            modeloDatos.setValueAt(datos.getNombre()+" "+datos.getApellido(), i, 1);
+            modeloDatos.setValueAt(datos.getDireccion(), i, 2);
+            modeloDatos.setValueAt(datos.getNit(), i, 3);
         }  
     }
     
@@ -438,15 +606,21 @@ public class MenuCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregarD;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblSaludo;
     private javax.swing.JRadioButton opCredito;
     private javax.swing.JRadioButton opDebito;
@@ -456,10 +630,15 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JPanel panel4;
     private javax.swing.JPanel panel5;
     private javax.swing.JTabbedPane tabbed;
+    private javax.swing.JTable tableDF;
     private javax.swing.JTable tableT;
     private javax.swing.ButtonGroup tipo;
+    private javax.swing.JTextField txtApellidoD;
+    private javax.swing.JTextField txtDireccionD;
     private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtNITD;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombreD;
     private javax.swing.JTextField txtNumero;
     // End of variables declaration//GEN-END:variables
 }
