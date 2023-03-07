@@ -34,9 +34,17 @@ public class ControladorTarjeta {
         LimpiarArray();
         for(Tarjetas t: arrayTarjeta) {
             if(t.getUsuario().equals(controladorU.UsuarioLogeado().getCorreo())) {
-                arrayTarjetasUsuario.add(new Tarjetas(t.getNombre(), t.getTipo(), t.getNumero(),t.getFecha(), t.getUsuario()));
+                arrayTarjetasUsuario.add(new Tarjetas(t.getNombre(), t.getTipo(), OcultarNumero(t.getNumero()),t.getFecha(), t.getUsuario()));
             }
         }
+    }
+    
+    public String OcultarNumero(String numero) {
+        char[] num = numero.toCharArray();
+        for(int i = 0; i <= num.length-5; i++) {
+            num[i] = "X".charAt(0);
+        }
+        return String.valueOf(num);
     }
     
     public ArrayList<Tarjetas> ObtenerTarjetasUsuario() {
