@@ -47,7 +47,7 @@ public class MenuCliente extends javax.swing.JFrame {
         LlenarTabla();
         controladorDF.DatosUsuario();
         LlenarTablaDatos();
-        DatosComboboxDepartamento();
+        DatosIniciales();
         ValoresRadio();
     }
 
@@ -63,6 +63,8 @@ public class MenuCliente extends javax.swing.JFrame {
         tipo = new javax.swing.ButtonGroup();
         tamanioP = new javax.swing.ButtonGroup();
         tipoServicio = new javax.swing.ButtonGroup();
+        tipoPago = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
         lblSaludo = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -119,6 +121,32 @@ public class MenuCliente extends javax.swing.JFrame {
         opEspecial = new javax.swing.JRadioButton();
         opEstandar = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        opPContraEntrega = new javax.swing.JRadioButton();
+        opConTarjeta = new javax.swing.JRadioButton();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        cmbDatosF = new javax.swing.JComboBox<>();
+        lblTarjeta = new javax.swing.JLabel();
+        cmbTarjeta = new javax.swing.JComboBox<>();
+        lblCVV = new javax.swing.JLabel();
+        txtCVV = new javax.swing.JTextField();
+        btnPago = new javax.swing.JButton();
+        btnDFactura = new javax.swing.JButton();
+        btnDGuia = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -507,6 +535,59 @@ public class MenuCliente extends javax.swing.JFrame {
         opEstandar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         opEstandar.setText("Estándar (Q 00.00)");
 
+        jLabel20.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel20.setText("PAGO");
+
+        jLabel21.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel21.setText("TIPO DE PAGO");
+
+        tipoPago.add(opPContraEntrega);
+        opPContraEntrega.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        opPContraEntrega.setText("Pago contra entrega");
+        opPContraEntrega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opPContraEntregaActionPerformed(evt);
+            }
+        });
+
+        tipoPago.add(opConTarjeta);
+        opConTarjeta.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        opConTarjeta.setText("Pago con tarjeta");
+        opConTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opConTarjetaActionPerformed(evt);
+            }
+        });
+
+        jLabel22.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel22.setText("Cobro adicional de Q 5.00");
+
+        jLabel23.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel23.setText("DATOS DE FACTURACIÓN");
+
+        cmbDatosF.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+
+        lblTarjeta.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lblTarjeta.setText("TARJETA");
+
+        lblCVV.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lblCVV.setText("CVV");
+
+        txtCVV.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+
+        btnPago.setText("REALIZAR PAGO");
+
+        btnDFactura.setText("DESCARGAR FACTURA");
+
+        btnDGuia.setText("DESGARGAR GUÍA");
+
+        btnCancelar.setText("CANCELAR");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
         panel3.setLayout(panel3Layout);
         panel3Layout.setHorizontalGroup(
@@ -530,7 +611,7 @@ public class MenuCliente extends javax.swing.JFrame {
                         .addComponent(btnCotizar, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                         .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
                                 .addComponent(jLabel17)
@@ -564,19 +645,48 @@ public class MenuCliente extends javax.swing.JFrame {
                             .addComponent(cmbDD, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(txtDD, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47))
-            .addGroup(panel3Layout.createSequentialGroup()
-                .addContainerGap(328, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addGap(365, 365, 365))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
                         .addComponent(jLabel18)
-                        .addGap(321, 321, 321))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                        .addGap(321, 321, 321))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addGap(383, 383, 383))))
+            .addGroup(panel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSeparator1)
-                .addContainerGap())
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(cmbTarjeta, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21)
+                            .addGroup(panel3Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel22))
+                            .addComponent(opConTarjeta)
+                            .addComponent(opPContraEntrega)))
+                    .addComponent(lblTarjeta))
+                .addGap(116, 116, 116)
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblCVV)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbDatosF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCVV))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnDFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDGuia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -627,7 +737,48 @@ public class MenuCliente extends javax.swing.JFrame {
                 .addComponent(btnCotizar)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel20)
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel23)))
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(btnPago)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(opPContraEntrega)
+                    .addComponent(cmbDatosF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22)
+                    .addComponent(btnDFactura, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(opConTarjeta)
+                        .addGap(33, 33, 33)
+                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTarjeta)
+                            .addComponent(lblCVV)))
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(btnDGuia)))
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panel3Layout.createSequentialGroup()
+                                .addComponent(txtCVV, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                                .addGap(2, 2, 2))))
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(btnCancelar)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         tabbed.addTab("tab3", panel3);
@@ -703,6 +854,7 @@ public class MenuCliente extends javax.swing.JFrame {
                     LimpiarTextField();
                     controladorT.TarjetasUsuario();
                     LlenarTabla();
+                    DatosTarjeta();
                 } else {
                     JOptionPane.showMessageDialog(this, "El número de tarjeta debe tener mas de 8 digitos.");
                 }
@@ -724,6 +876,7 @@ public class MenuCliente extends javax.swing.JFrame {
                 LimpiarTextField();
                 controladorDF.DatosUsuario();
                 LlenarTablaDatos();
+                DatosFacturacion();
             } else {
                 JOptionPane.showMessageDialog(this, "Ya existe esa dirección.");
             }
@@ -744,12 +897,35 @@ public class MenuCliente extends javax.swing.JFrame {
 
     private void btnCotizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCotizarActionPerformed
         if(ValidarCamposCotizar()) {
-            JOptionPane.showMessageDialog(this, "El total seria: "+controladorC.Cotizar((String)cmbDO.getSelectedItem(), (String)cmbMO.getSelectedItem(), txtDO.getText(), (String)cmbDD.getSelectedItem(), (String)cmbMD.getSelectedItem(), txtDD.getText(), String.valueOf(spinner.getValue()), tamanioP.getSelection().getActionCommand(), tipoServicio.getSelection().getActionCommand()));
+            JOptionPane.showMessageDialog(this, "El total seria: Q"+controladorC.Cotizar((String)cmbDO.getSelectedItem(), (String)cmbMO.getSelectedItem(), txtDO.getText(), (String)cmbDD.getSelectedItem(), (String)cmbMD.getSelectedItem(), txtDD.getText(), String.valueOf(spinner.getValue()), tamanioP.getSelection().getActionCommand(), tipoServicio.getSelection().getActionCommand()));
         } else {
             JOptionPane.showMessageDialog(this, "Debes rellenar todos los campos");
         }
         
     }//GEN-LAST:event_btnCotizarActionPerformed
+
+    private void opConTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opConTarjetaActionPerformed
+        lblTarjeta.setVisible(true);
+        cmbTarjeta.setVisible(true);
+        lblCVV.setVisible(true);
+        txtCVV.setVisible(true);
+    }//GEN-LAST:event_opConTarjetaActionPerformed
+
+    private void opPContraEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opPContraEntregaActionPerformed
+        lblTarjeta.setVisible(false);
+        cmbTarjeta.setVisible(false);
+        lblCVV.setVisible(false);
+        txtCVV.setVisible(false);
+    }//GEN-LAST:event_opPContraEntregaActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        LimpiarTextFieldCotizar();
+        lblTarjeta.setVisible(false);
+        cmbTarjeta.setVisible(false);
+        lblCVV.setVisible(false);
+        txtCVV.setVisible(false);
+        btnCancelar.setVisible(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
      
     // METODOS PARA TARJETAS
     private boolean ValidarTextField() {
@@ -810,7 +986,7 @@ public class MenuCliente extends javax.swing.JFrame {
     
     // METODOS PARA COTIZACIÓN
     
-    private void DatosComboboxDepartamento() {
+    private void DatosIniciales() {
         cmbDO.addItem("DEPARTAMENTO");
         cmbDD.addItem("DEPARTAMENTO");
         //if(!cmbMO.getItemAt(0).equals("MUNICIPIO") || !cmbMD.getItemAt(0).equals("MUNICIPIO")) {
@@ -822,6 +998,19 @@ public class MenuCliente extends javax.swing.JFrame {
             cmbDO.addItem(controladorD.ObtenerDepartamento().get(i).getNombre());
             cmbDD.addItem(controladorD.ObtenerDepartamento().get(i).getNombre());
         }
+        
+        // DATOS DE PAGO VISIBLES        
+        lblTarjeta.setVisible(false);
+        cmbTarjeta.setVisible(false);
+        lblCVV.setVisible(false);
+        txtCVV.setVisible(false);
+        btnCancelar.setVisible(false);
+        
+        cmbDatosF.addItem("SELECCIONA UN DATO");
+        cmbTarjeta.addItem("SELECCIONA UNA TARJETA");
+        
+        DatosFacturacion();
+        DatosTarjeta();
     }
     
     private void DatosComboboxMunicipio(JComboBox cmb, String nombre) {
@@ -844,6 +1033,7 @@ public class MenuCliente extends javax.swing.JFrame {
     
     private boolean ValidarCamposCotizar() {
         if(cmbDO.getSelectedIndex() != 0 && cmbMO.getSelectedIndex() != 0 && !txtDO.getText().isEmpty() && cmbDD.getSelectedIndex() != 0 && cmbMD.getSelectedIndex() != 0 && (Integer)spinner.getValue() >= 1 && (opPequenio.isSelected() || opMediano.isSelected() || opGrande.isSelected()) && (tipoServicio.getSelection() != null)) {
+            btnCancelar.setVisible(true);
             return true;
         }
         return false;
@@ -866,6 +1056,37 @@ public class MenuCliente extends javax.swing.JFrame {
         
     }
     
+    private void DatosFacturacion() {
+        cmbDatosF.removeAllItems();
+        cmbDatosF.addItem("SELECCIONA UN DATO");
+        for(int i=0; i < controladorDF.ObtenerDatos().size(); i++) {
+            cmbDatosF.addItem(controladorDF.ObtenerDatos().get(i).getNombre()+" "+controladorDF.ObtenerDatos().get(i).getApellido()+", "+controladorDF.ObtenerDatos().get(i).getDireccion());
+        }
+    }
+    
+    private void DatosTarjeta() {
+        cmbTarjeta.removeAllItems();
+        cmbTarjeta.addItem("SELECCIONA UNA TARJETA");
+        for(int i=0; i < controladorT.ObtenerTarjetasUsuario().size(); i++) {
+            cmbTarjeta.addItem(controladorT.ObtenerTarjetasUsuario().get(i).getNumero());
+        }
+    }
+    
+    private void LimpiarTextFieldCotizar() {
+        cmbDO.setSelectedIndex(0);
+        cmbMO.removeAllItems();
+        cmbDD.setSelectedIndex(0);
+        cmbMD.removeAllItems();
+        txtDO.setText("");
+        txtDD.setText("");
+        tamanioP.clearSelection();
+        spinner.setValue(0);
+        tipoServicio.clearSelection();
+        tipoPago.clearSelection();
+        cmbDatosF.setSelectedIndex(0);
+        txtCVV.setText("");
+        cmbTarjeta.setSelectedIndex(0);
+    }
     
     /**
      * @param args the command line arguments
@@ -905,11 +1126,17 @@ public class MenuCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarD;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCotizar;
+    private javax.swing.JButton btnDFactura;
+    private javax.swing.JButton btnDGuia;
+    private javax.swing.JButton btnPago;
     private javax.swing.JComboBox<String> cmbDD;
     private javax.swing.JComboBox<String> cmbDO;
+    private javax.swing.JComboBox<String> cmbDatosF;
     private javax.swing.JComboBox<String> cmbMD;
     private javax.swing.JComboBox<String> cmbMO;
+    private javax.swing.JComboBox<String> cmbTarjeta;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -923,6 +1150,10 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -930,16 +1161,21 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblCVV;
     private javax.swing.JLabel lblSaludo;
+    private javax.swing.JLabel lblTarjeta;
+    private javax.swing.JRadioButton opConTarjeta;
     private javax.swing.JRadioButton opCredito;
     private javax.swing.JRadioButton opDebito;
     private javax.swing.JRadioButton opEspecial;
     private javax.swing.JRadioButton opEstandar;
     private javax.swing.JRadioButton opGrande;
     private javax.swing.JRadioButton opMediano;
+    private javax.swing.JRadioButton opPContraEntrega;
     private javax.swing.JRadioButton opPequenio;
     private javax.swing.JPanel panel1;
     private javax.swing.JPanel panel2;
@@ -952,8 +1188,10 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JTable tableT;
     private javax.swing.ButtonGroup tamanioP;
     private javax.swing.ButtonGroup tipo;
+    private javax.swing.ButtonGroup tipoPago;
     private javax.swing.ButtonGroup tipoServicio;
     private javax.swing.JTextField txtApellidoD;
+    private javax.swing.JTextField txtCVV;
     private javax.swing.JTextField txtDD;
     private javax.swing.JTextField txtDO;
     private javax.swing.JTextField txtDireccionD;
