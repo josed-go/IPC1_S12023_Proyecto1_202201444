@@ -15,7 +15,7 @@ public class ControladorDatosFacturacion {
     
     public void AgregarDatos(String nombre, String apellido, String direccion, String nit) {
         if(!ValidarDatos(direccion)) {
-            arrayDatos.add(new DatosFacturacion(nombre, apellido, direccion, nit, usuario.UsuarioLogeado().getCorreo()));
+            arrayDatos.add(new DatosFacturacion(nombre, apellido, direccion, nit, usuario.UsuarioLogeado().getCorreo(), "Datos"));
         }
     }
     
@@ -34,7 +34,7 @@ public class ControladorDatosFacturacion {
         LimpiarArray();
         for(DatosFacturacion d: arrayDatos) {
             if(d.getUsuario().equals(usuario.UsuarioLogeado().getCorreo())) {
-                arrayDatosUsuario.add(new DatosFacturacion(d.getNombre(), d.getApellido(), d.getDireccion(),d.getNit(),d.getUsuario()));
+                arrayDatosUsuario.add(new DatosFacturacion(d.getNombre(), d.getApellido(), d.getDireccion(),d.getNit(),d.getUsuario(), "Datos"));
             }
         }
     }
