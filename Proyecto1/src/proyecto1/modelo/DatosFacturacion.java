@@ -10,13 +10,15 @@ public class DatosFacturacion {
     private String direccion;
     private String nit;
     private String usuario;
+    private String idDatos;
 
-    public DatosFacturacion(String nombre, String apellido, String direccion, String nit, String usuario) {
+    public DatosFacturacion(String nombre, String apellido, String direccion, String nit, String usuario, String idDatos) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
         this.nit = nit;
         this.usuario = usuario;
+        this.idDatos = idDatos;
     }
 
     public String getNombre() {
@@ -58,5 +60,13 @@ public class DatosFacturacion {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-      
+
+    public String getIdDatos() {
+        return idDatos;
+    }
+
+    public void setIdDatos(String idDatos) {
+        this.idDatos = idDatos;
+    }
+          
 }
