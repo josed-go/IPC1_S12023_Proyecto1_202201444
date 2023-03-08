@@ -12,6 +12,7 @@ import proyecto1.controlador.ControladorCompra;
 import proyecto1.controlador.ControladorDatosFacturacion;
 import proyecto1.controlador.ControladorDepartamento;
 import proyecto1.controlador.ControladorMunicipio;
+import proyecto1.controlador.ControladorRegion;
 import proyecto1.controlador.ControladorTarjeta;
 import proyecto1.controlador.ControladorUsuario;
 import proyecto1.modelo.DatosFacturacion;
@@ -32,6 +33,7 @@ public class MenuCliente extends javax.swing.JFrame {
     ControladorDepartamento controladorD = new ControladorDepartamento();
     ControladorMunicipio controladorM = new ControladorMunicipio();
     ControladorCompra controladorC = new ControladorCompra();
+    ControladorRegion controladorR = new ControladorRegion();
     
     public MenuCliente() {
         initComponents();
@@ -499,11 +501,11 @@ public class MenuCliente extends javax.swing.JFrame {
 
         tipoServicio.add(opEspecial);
         opEspecial.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        opEspecial.setText("Especial");
+        opEspecial.setText("Especial (Q 00.00)");
 
         tipoServicio.add(opEstandar);
         opEstandar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        opEstandar.setText("Estándar");
+        opEstandar.setText("Estándar (Q 00.00)");
 
         javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
         panel3.setLayout(panel3Layout);
@@ -522,15 +524,13 @@ public class MenuCliente extends javax.swing.JFrame {
                             .addGap(36, 36, 36)
                             .addComponent(jLabel13))
                         .addComponent(cmbDO, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(btnCotizar, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addGap(179, 179, 179))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panel3Layout.createSequentialGroup()
-                            .addComponent(btnCotizar, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
                                 .addComponent(jLabel17)
@@ -546,10 +546,13 @@ public class MenuCliente extends javax.swing.JFrame {
                                 .addComponent(opGrande)
                                 .addGap(121, 121, 121))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addGap(179, 179, 179))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
                                 .addComponent(opEstandar)
                                 .addGap(18, 18, 18)
                                 .addComponent(opEspecial)
-                                .addGap(165, 165, 165)))))
+                                .addGap(106, 106, 106)))))
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
                     .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -620,9 +623,9 @@ public class MenuCliente extends javax.swing.JFrame {
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
+                .addGap(21, 21, 21)
                 .addComponent(btnCotizar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(318, Short.MAX_VALUE))
         );
@@ -735,6 +738,8 @@ public class MenuCliente extends javax.swing.JFrame {
 
     private void cmbDDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDDItemStateChanged
         DatosComboboxMunicipio(cmbMD, (String)cmbDD.getSelectedItem());
+        PrecioServicio();
+        
     }//GEN-LAST:event_cmbDDItemStateChanged
 
     private void btnCotizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCotizarActionPerformed
@@ -829,6 +834,7 @@ public class MenuCliente extends javax.swing.JFrame {
             for(int i=0; i < controladorM.ObtenerMunicipios().size(); i++) {
                 cmb.addItem(controladorM.ObtenerMunicipios().get(i).getNombre());
             }
+            
         } else {
             cmb.removeAllItems();
             cmb.addItem("MUNICIPIO");
@@ -849,7 +855,16 @@ public class MenuCliente extends javax.swing.JFrame {
         opGrande.setActionCommand("Grande");
         opEstandar.setActionCommand("Estándar");
         opEspecial.setActionCommand("Especial");
+        
     }   
+    
+    private void PrecioServicio() {
+        if(!cmbDD.getSelectedItem().equals("DEPARTAMENTO")) {
+            opEstandar.setText("Estándar (Q "+controladorR.ObtenerRegionSeleccionada(controladorD.ObtenerDepartamentoNombre((String)cmbDD.getSelectedItem()).getCodigoRegion()).getEstandar()+")");
+            opEspecial.setText("Especial (Q "+controladorR.ObtenerRegionSeleccionada(controladorD.ObtenerDepartamentoNombre((String)cmbDD.getSelectedItem()).getCodigoRegion()).getEspecial()+")");
+        }
+        
+    }
     
     
     /**
