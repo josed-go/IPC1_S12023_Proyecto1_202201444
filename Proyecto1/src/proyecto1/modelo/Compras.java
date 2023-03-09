@@ -15,15 +15,16 @@ public class Compras {
     private String direccionD;
     
     private String idPaquete;
+    private String tipoServicio;
     private String numeroP;
-    private String tamanioP;
     private String pesoP;
     private String tipoPago;
+    private String numeroTarjeta;
     private String datosFacturacion;
     private String total;
     private String usuario;
 
-    public Compras(String departamentoO, String muicipioO, String direccionO, String departamentoD, String municipioD, String direccionD, String idPaquete, String numeroP, String tamanioP, String pesoP, String tipoPago, String datosFacturacion, String total, String usuario) {
+    public Compras(String departamentoO, String muicipioO, String direccionO, String departamentoD, String municipioD, String direccionD, String idPaquete, String tipoServicio, String numeroP, String pesoP, String tipoPago, String datosFacturacion, String total, String usuario) {
         this.departamentoO = departamentoO;
         this.muicipioO = muicipioO;
         this.direccionO = direccionO;
@@ -31,10 +32,28 @@ public class Compras {
         this.municipioD = municipioD;
         this.direccionD = direccionD;
         this.idPaquete = idPaquete;
+        this.tipoServicio = tipoServicio;
         this.numeroP = numeroP;
-        this.tamanioP = tamanioP;
         this.pesoP = pesoP;
         this.tipoPago = tipoPago;
+        this.datosFacturacion = datosFacturacion;
+        this.total = total;
+        this.usuario = usuario;
+    }
+    
+    public Compras(String departamentoO, String muicipioO, String direccionO, String departamentoD, String municipioD, String direccionD, String idPaquete, String tipoServicio, String numeroP, String pesoP, String tipoPago, String numeroTarjeta, String datosFacturacion, String total, String usuario) {
+        this.departamentoO = departamentoO;
+        this.muicipioO = muicipioO;
+        this.direccionO = direccionO;
+        this.departamentoD = departamentoD;
+        this.municipioD = municipioD;
+        this.direccionD = direccionD;
+        this.idPaquete = idPaquete;
+        this.tipoServicio = tipoServicio;
+        this.numeroP = numeroP;
+        this.pesoP = pesoP;
+        this.tipoPago = tipoPago;
+        this.numeroTarjeta = numeroTarjeta;
         this.datosFacturacion = datosFacturacion;
         this.total = total;
         this.usuario = usuario;
@@ -96,20 +115,20 @@ public class Compras {
         this.idPaquete = idPaquete;
     }
 
+    public String getTipoServicio() {
+        return tipoServicio;
+    }
+
+    public void setTipoServicio(String tipoServicio) {
+        this.tipoServicio = tipoServicio;
+    }
+
     public String getNumeroP() {
         return numeroP;
     }
 
     public void setNumeroP(String numeroP) {
         this.numeroP = numeroP;
-    }
-
-    public String getTamanioP() {
-        return tamanioP;
-    }
-
-    public void setTamanioP(String tamanioP) {
-        this.tamanioP = tamanioP;
     }
 
     public String getPesoP() {
@@ -126,6 +145,14 @@ public class Compras {
 
     public void setTipoPago(String tipoPago) {
         this.tipoPago = tipoPago;
+    }
+
+    public String getNumeroTarjeta() {
+        return numeroTarjeta;
+    }
+
+    public void setNumeroTarjeta(String numeroTarjeta) {
+        this.numeroTarjeta = numeroTarjeta;
     }
 
     public String getDatosFacturacion() {
