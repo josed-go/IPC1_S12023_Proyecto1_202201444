@@ -2,6 +2,8 @@ package proyecto1.controlador;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import proyecto1.modelo.Compras;
+import proyecto1.modelo.DatosFacturacion;
 
 /**
  *
@@ -25,6 +28,7 @@ public class ControladorCompra {
     ControladorRegion controladorR = new ControladorRegion();
     ControladorDepartamento controladorD = new ControladorDepartamento();
     ControladorUsuario usuario = new ControladorUsuario();
+    ControladorDatosFacturacion controladorDF = new ControladorDatosFacturacion();
     
     String path;
     String totalPDF;
@@ -267,6 +271,91 @@ public class ControladorCompra {
             System.out.println(ex);
         }
         path = "";
+    }
+    
+    public Compras FacturaSeleccionada(String codigoPaquete) {
+        for(Compras c: arrayCompraUsuario) {
+            if(c.getIdPaquete().equals(codigoPaquete)) {
+                return c;
+            }
+        }
+        return null;
+    }
+    
+    public void GenerarFactura(String codigoPaquete) {
+        Compras compraF;
+        String nit = "";
+        String nombreF = "";
+        String direccion = "";
+        StringBuilder codigoHTML = new StringBuilder();
+        
+        compraF = FacturaSeleccionada(codigoPaquete);
+        
+        for(DatosFacturacion df: controladorDF.ObtenerDatos()) {
+            if((df.getNombre()+" "+df.getApellido()+", "+df.getDireccion()).equals(compraF.getDatosFacturacion())) {
+                nit = df.getNit();
+                nombreF = df.getNombre()+" "+df.getApellido();
+                direccion = df.getDireccion();
+            }
+        }
+        
+        codigoHTML.append("<html>");
+        codigoHTML.append("<head>");
+        codigoHTML.append("<title>Factura"+compraF.getIdPaquete()+"</title>");
+        codigoHTML.append("</head>");
+        codigoHTML.append("<body style=\"margin-left: 250px; margin-right: 250px; border: solid #3f578d; border-radius: 10px;\">");
+        codigoHTML.append("<h1 style=\"text-align:center; font-size:75px;\">Factura No. 123468</h1>");
+        codigoHTML.append("<div style=\"display: grid; grid-column: 2; grid-row: 1; grid-gap: 50px; margin: 35px;\">");
+        codigoHTML.append("<img style=\"grid-column: 1/2;\" src=\"../img/U-delivery.png\" height=\"274px\" width=\"459\">");
+        codigoHTML.append("<div style=\"grid-column: 2/2; padding-top: 35px;\">");
+        codigoHTML.append("<h2>NIT: "+nit+"</h2>");
+        codigoHTML.append("<h2>Nombre: "+nombreF+"</h2>");
+        codigoHTML.append("<h2>Dirección: "+direccion+"</h2>");
+        codigoHTML.append("<h2>Tipo de pago: "+compraF.getTipoPago()+"</h2>");
+        codigoHTML.append("</div>");
+        codigoHTML.append("</div>");
+        codigoHTML.append("<hr style=\"margin: 35px;\">");
+        codigoHTML.append("<h2 style=\"margin: 35px;\">Codigo de paquete: "+compraF.getIdPaquete()+"</h2>");
+        if(compraF.getTipoPago().equalsIgnoreCase("Contra entrega")) {
+            codigoHTML.append("<h2 style=\"margin: 35px;\">Recargo de Q5.00</h2>");
+        } else if(compraF.getTipoPago().equalsIgnoreCase("Con tarjeta")) {
+            codigoHTML.append("<h2 style=\"margin: 35px;\">Numero tarjeta: "+compraF.getNumeroTarjeta()+"</h2>");
+        }
+        
+        codigoHTML.append("<div style=\"margin: 35px; text-align: center; align-items: center; \">");
+        codigoHTML.append("<table style=\"margin: 0 auto; width: 100%;\" border=\"1\">");
+        codigoHTML.append("<tr style=\"background-color: #acd3ff ;\">");
+        codigoHTML.append("<th >Departamento Origen</th>");
+        codigoHTML.append("<th >Municipio Origen</th>");
+        codigoHTML.append("<th >Departamento Destino</th>");
+        codigoHTML.append("<th >Municipio Destino</th>");
+        codigoHTML.append("<th >Tamaño paquete</th>");
+        codigoHTML.append("<th >Numero de paquetes</th>");
+        codigoHTML.append("<th>Total</th>");
+        codigoHTML.append("</tr>");
+        codigoHTML.append("<tr>");
+        codigoHTML.append("<td>"+compraF.getDepartamentoO()+"</td>");
+        codigoHTML.append("<td>"+compraF.getMunicipioD()+"</td>");
+        codigoHTML.append("<td>"+compraF.getDepartamentoD()+"</td>");
+        codigoHTML.append("<td>"+compraF.getMuicipioO()+"</td>");
+        codigoHTML.append("<td>"+compraF.getPesoP()+"</td>");
+        codigoHTML.append("<td>"+compraF.getNumeroP()+"</td>");
+        codigoHTML.append("<td>Q"+compraF.getTotal()+"</td>");
+        codigoHTML.append("</tr>");
+        codigoHTML.append("</table>");
+        codigoHTML.append("</div>");
+        codigoHTML.append("</body>");
+        codigoHTML.append("</html>");
+        
+        try {
+            File file = new File("src/pdf/Factura-"+compraF.getIdPaquete()+".html");
+            FileWriter html = new FileWriter(file);
+            html.write(codigoHTML.toString());
+            html.close();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        
     }
     
 }

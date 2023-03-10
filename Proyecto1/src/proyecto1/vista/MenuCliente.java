@@ -341,6 +341,11 @@ public class MenuCliente extends javax.swing.JFrame {
 
         btnFactura.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnFactura.setText("DESCARGAR FACTURA");
+        btnFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFacturaActionPerformed(evt);
+            }
+        });
 
         btnGuia.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnGuia.setText("DESCARGAR GUÍA");
@@ -1074,6 +1079,10 @@ public class MenuCliente extends javax.swing.JFrame {
         /*LimpiarTextFieldCotizar();
         btnDescargarC.setVisible(false);*/
     }//GEN-LAST:event_btnDescargarCActionPerformed
+
+    private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
+        controladorC.GenerarFactura((String)tableE.getValueAt(tableE.getSelectedRow(), 1));
+    }//GEN-LAST:event_btnFacturaActionPerformed
      
     // METODOS PARA TARJETAS
     private boolean ValidarTextField() {
