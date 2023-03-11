@@ -44,6 +44,7 @@ public class MenuCliente extends javax.swing.JFrame {
     String totalcotizar;
     String totalC;
     String datosFE;
+    String numeroE;
     ImageIcon image;
     
     public MenuCliente() {
@@ -118,6 +119,7 @@ public class MenuCliente extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         opDebito = new javax.swing.JRadioButton();
         opCredito = new javax.swing.JRadioButton();
+        btnCancelarT = new javax.swing.JButton();
         panel3 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -456,8 +458,12 @@ public class MenuCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableT.setEnabled(false);
         tableT.setFocusable(false);
+        tableT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableTMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableT);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -509,6 +515,14 @@ public class MenuCliente extends javax.swing.JFrame {
         opCredito.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         opCredito.setText("Crédito");
 
+        btnCancelarT.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        btnCancelarT.setText("CANCELAR");
+        btnCancelarT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarTActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -520,29 +534,31 @@ public class MenuCliente extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAgregar)
-                            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(panel1Layout.createSequentialGroup()
-                                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel5))
-                                    .addGap(26, 26, 26)
-                                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtNumero)
-                                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(84, 84, 84)
-                                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel7))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(panel1Layout.createSequentialGroup()
-                                            .addComponent(opDebito)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(opCredito))))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(26, 26, 26)
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNumero)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(84, 84, 84)
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panel1Layout.createSequentialGroup()
+                                        .addComponent(opDebito)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(opCredito)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnCancelarT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(101, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
@@ -550,21 +566,21 @@ public class MenuCliente extends javax.swing.JFrame {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addComponent(btnAgregar)
-                .addGap(1, 1, 1)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgregar))
+                .addGap(29, 29, 29)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(opDebito)
-                    .addComponent(opCredito))
+                    .addComponent(opCredito)
+                    .addComponent(btnCancelarT))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
@@ -1049,33 +1065,65 @@ public class MenuCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbDOItemStateChanged
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        String tipo;
-        if(ValidarTextField()) {
-            if(opDebito.isSelected()) {
-                tipo = opDebito.getText();
-            } else {
-                tipo = opCredito.getText();
-            }
-
-            if(!controladorT.ValidarTarjeta(txtNumero.getText())) {
-                if(txtNumero.getText().length() >= 8) {
-                    controladorT.CrearTarjeta(txtNombre.getText(), tipo, txtNumero.getText(), txtFecha.getText());
-                    JOptionPane.showMessageDialog(this, "Tarjeta agregada.");
-                    LimpiarTextField();
-                    controladorT.TarjetasUsuario();
-                    LlenarTabla();
-                    DatosTarjeta();
+        String tipo = "";
+        if(btnAgregar.getText().equals("AGREGAR")) {
+            if(ValidarTextField()) {
+                if(opDebito.isSelected()) {
+                    tipo = opDebito.getText();
                 } else {
-                    JOptionPane.showMessageDialog(this, "El número de tarjeta debe tener mas de 8 digitos.");
+                    tipo = opCredito.getText();
+                }
+
+                if(!controladorT.ValidarTarjeta(txtNumero.getText())) {
+                    if(txtNumero.getText().length() >= 8) {
+                        controladorT.CrearTarjeta(txtNombre.getText(), tipo, txtNumero.getText(), txtFecha.getText());
+                        JOptionPane.showMessageDialog(this, "Tarjeta agregada.");
+                        LimpiarTextField();
+                        controladorT.TarjetasUsuario();
+                        LlenarTabla();
+                        DatosTarjeta();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "El número de tarjeta debe tener mas de 8 digitos.");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ya existe esa tarjeta.");
                 }
 
             } else {
-                JOptionPane.showMessageDialog(this, "Ya existe esa tarjeta.");
+                JOptionPane.showMessageDialog(this, "Debes rellenar todos los campos.");
             }
+        } else if(btnAgregar.getText().equals("EDITAR")) {
+            if(ValidarTextField()) {
+                if(opDebito.isSelected()) {
+                    tipo = opDebito.getText();
+                } else {
+                    tipo = opCredito.getText();
+                }
 
-        } else {
-            JOptionPane.showMessageDialog(this, "Debes rellenar todos los campos.");
+                if(!controladorT.ValidarTarjeta(txtNumero.getText()) || numeroE.equals(controladorT.OcultarNumero(txtNumero.getText()))) {
+                    if(txtNumero.getText().length() >= 8) {
+                        controladorT.EditarTarjeta(numeroE,txtNombre.getText(), tipo, txtNumero.getText(), txtFecha.getText());
+                        JOptionPane.showMessageDialog(this, "Tarjeta editada.");
+                        LimpiarTextField();
+                        controladorT.TarjetasUsuario();
+                        LlenarTabla();
+                        DatosTarjeta();
+                        btnCancelarT.setVisible(false);
+                        btnAgregar.setText("AGREGAR");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "El número de tarjeta debe tener mas de 8 digitos.");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ya existe esa tarjeta.");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Debes rellenar todos los campos.");
+            }
         }
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -1181,6 +1229,31 @@ public class MenuCliente extends javax.swing.JFrame {
         LimpiarTextField();
         tableDF.clearSelection();
     }//GEN-LAST:event_btnCancelarDFActionPerformed
+
+    private void tableTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTMouseClicked
+        if(tableT.getSelectedRow() >= 0) {
+            Tarjetas tarjeta = controladorT.ObtenerTarjeta((String)tableT.getValueAt(tableT.getSelectedRow(), 2));
+            txtNombre.setText(tarjeta.getNombre());
+            txtFecha.setText(tarjeta.getFecha());
+            txtNumero.setText(tarjeta.getNumero());
+            if(tarjeta.getTipo().equals("Crédito")) {
+                tipo.setSelected(opCredito.getModel(), true);
+            } else if (tarjeta.getTipo().equals("Débito")) {
+                tipo.setSelected(opDebito.getModel(), true);
+            }
+            
+            btnAgregar.setText("EDITAR");
+            btnCancelarT.setVisible(true);
+            numeroE = (String)tableT.getValueAt(tableT.getSelectedRow(), 2);
+        }
+    }//GEN-LAST:event_tableTMouseClicked
+
+    private void btnCancelarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTActionPerformed
+        btnAgregar.setText("AGREGAR");
+        btnCancelarT.setVisible(false);
+        LimpiarTextField();
+        tableT.clearSelection();
+    }//GEN-LAST:event_btnCancelarTActionPerformed
      
     // METODOS PARA TARJETAS
     private boolean ValidarTextField() {
@@ -1307,6 +1380,7 @@ public class MenuCliente extends javax.swing.JFrame {
         btnFactura.setVisible(false);
         btnGuia.setVisible(false);
         btnCancelarDF.setVisible(false);
+        btnCancelarT.setVisible(false);
     }   
     
     private void PrecioServicio() {
@@ -1446,6 +1520,7 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCancelarDF;
     private javax.swing.JButton btnCancelarEnvio;
+    private javax.swing.JButton btnCancelarT;
     private javax.swing.JButton btnCotizar;
     private javax.swing.JButton btnDescargarC;
     private javax.swing.JButton btnFactura;

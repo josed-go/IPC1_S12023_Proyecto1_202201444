@@ -19,6 +19,19 @@ public class ControladorTarjeta {
         }
     }
     
+    public void EditarTarjeta(String numeroE, String nombre, String tipo, String numero, String fecha) {
+        for(Tarjetas t: arrayTarjeta) {
+            if(OcultarNumero(t.getNumero()).equals(numeroE)) {
+                if(!ValidarTarjeta(numero) || numeroE.equals(OcultarNumero(numero))) {
+                    t.setNombre(nombre);
+                    t.setNumero(numero);
+                    t.setTipo(tipo);
+                    t.setFecha(fecha);
+                }
+            }
+        }
+    }
+    
     public boolean ValidarTarjeta(String numero) {
         
         for(Tarjetas t: arrayTarjeta){
@@ -37,6 +50,16 @@ public class ControladorTarjeta {
                 arrayTarjetasUsuario.add(new Tarjetas(t.getNombre(), t.getTipo(), OcultarNumero(t.getNumero()),t.getFecha(), t.getUsuario()));
             }
         }
+    }
+    
+    public Tarjetas ObtenerTarjeta(String numero) {
+        for(Tarjetas t: arrayTarjetasUsuario) {
+            if(t.getNumero().equals(OcultarNumero(numero))){
+                return t;
+            }
+        }
+        
+        return null;
     }
     
     public String OcultarNumero(String numero) {

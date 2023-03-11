@@ -498,36 +498,38 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="btnAgregar" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txtNumero" max="32767" attributes="0"/>
-                                              <Component id="txtNombre" min="-2" pref="139" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtFecha" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="opDebito" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="opCredito" min="-2" max="-2" attributes="0"/>
-                                              </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtNumero" max="32767" attributes="0"/>
+                                          <Component id="txtNombre" min="-2" pref="139" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtFecha" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="opDebito" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="opCredito" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="jScrollPane1" min="-2" pref="681" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="btnAgregar" max="32767" attributes="0"/>
+                                          <Component id="btnCancelarT" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
+                                  <Component id="jScrollPane1" min="-2" pref="681" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -540,22 +542,22 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="57" max="32767" attributes="0"/>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtFecha" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAgregar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                      <Component id="btnAgregar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNumero" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="opDebito" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="opCredito" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCancelarT" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
@@ -591,9 +593,11 @@
                         <Column editable="false" title="FECHA" type="java.lang.String"/>
                       </Table>
                     </Property>
-                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableTMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -691,6 +695,17 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cr&#xe9;dito"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnCancelarT">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="CANCELAR"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarTActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
