@@ -102,6 +102,7 @@ public class MenuCliente extends javax.swing.JFrame {
         tableE = new javax.swing.JTable();
         btnFactura = new javax.swing.JButton();
         btnGuia = new javax.swing.JButton();
+        btnCancelarEnvio = new javax.swing.JButton();
         panel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -337,6 +338,11 @@ public class MenuCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableEMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tableE);
 
         btnFactura.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -349,6 +355,19 @@ public class MenuCliente extends javax.swing.JFrame {
 
         btnGuia.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnGuia.setText("DESCARGAR GUÍA");
+        btnGuia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuiaActionPerformed(evt);
+            }
+        });
+
+        btnCancelarEnvio.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        btnCancelarEnvio.setText("CANCELAR");
+        btnCancelarEnvio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarEnvioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel4Layout = new javax.swing.GroupLayout(panel4);
         panel4.setLayout(panel4Layout);
@@ -369,7 +388,10 @@ public class MenuCliente extends javax.swing.JFrame {
                             .addGroup(panel4Layout.createSequentialGroup()
                                 .addGap(381, 381, 381)
                                 .addComponent(jLabel24)))
-                        .addGap(0, 202, Short.MAX_VALUE)))
+                        .addGap(0, 202, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnCancelarEnvio)))
                 .addContainerGap())
         );
         panel4Layout.setVerticalGroup(
@@ -381,7 +403,9 @@ public class MenuCliente extends javax.swing.JFrame {
                     .addGroup(panel4Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(126, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelarEnvio)
+                        .addContainerGap(94, Short.MAX_VALUE))
                     .addGroup(panel4Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -949,7 +973,7 @@ public class MenuCliente extends javax.swing.JFrame {
     private void btnPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagoActionPerformed
         if(ValidarCamposPago()) {
             controladorC.RealizarCompra((String)cmbDO.getSelectedItem(), (String)cmbMO.getSelectedItem(), txtDO.getText(), (String)cmbDD.getSelectedItem(), (String)cmbMD.getSelectedItem(), txtDD.getText(), String.valueOf(spinner.getValue()), tamanioP.getSelection().getActionCommand(), tipoPago.getSelection().getActionCommand(), (String)cmbTarjeta.getSelectedItem(), tipoServicio.getSelection().getActionCommand(), (String)cmbDatosF.getSelectedItem());
-            JOptionPane.showMessageDialog(this, "Pago realizado.");
+            JOptionPane.showMessageDialog(this, "Pago realizado. Puedes descargar tu factura o guía en la sección de envios.");
             controladorC.GuardarComprasUsuario();
             LlenarTablaEnvios();
             LimpiarTextFieldCotizar();
@@ -1082,7 +1106,28 @@ public class MenuCliente extends javax.swing.JFrame {
 
     private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
         controladorC.GenerarFactura((String)tableE.getValueAt(tableE.getSelectedRow(), 1));
+        JOptionPane.showMessageDialog(this, "Factura generada. Puedes ver el archivo en la carpeta documentos/facturas");
     }//GEN-LAST:event_btnFacturaActionPerformed
+
+    private void btnGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiaActionPerformed
+        controladorC.GenerarGuia((String)tableE.getValueAt(tableE.getSelectedRow(), 1));
+        JOptionPane.showMessageDialog(this, "Guía generada. Puedes ver el archivo en la carpeta documentos/guias");
+    }//GEN-LAST:event_btnGuiaActionPerformed
+
+    private void tableEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableEMouseClicked
+       if(tableE.getSelectedRow() >= 0) {
+            btnGuia.setVisible(true);
+            btnFactura.setVisible(true);
+            btnCancelarEnvio.setVisible(true);
+        }
+    }//GEN-LAST:event_tableEMouseClicked
+
+    private void btnCancelarEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEnvioActionPerformed
+        btnGuia.setVisible(false);
+            btnFactura.setVisible(false);
+            btnCancelarEnvio.setVisible(false);
+        tableE.clearSelection();
+    }//GEN-LAST:event_btnCancelarEnvioActionPerformed
      
     // METODOS PARA TARJETAS
     private boolean ValidarTextField() {
@@ -1198,6 +1243,7 @@ public class MenuCliente extends javax.swing.JFrame {
     
     private void ValoresRadio() {
         btnDescargarC.setVisible(false);
+        btnCancelarEnvio.setVisible(false);
         opPequenio.setActionCommand("Pequeño");
         opMediano.setActionCommand("Mediano");
         opGrande.setActionCommand("Grande");
@@ -1205,6 +1251,8 @@ public class MenuCliente extends javax.swing.JFrame {
         opEspecial.setActionCommand("Especial");
         opPContraEntrega.setActionCommand("Contra entrega");
         opPConTarjeta.setActionCommand("Con tarjeta");
+        btnFactura.setVisible(false);
+        btnGuia.setVisible(false);
     }   
     
     private void PrecioServicio() {
@@ -1342,6 +1390,7 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarD;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCancelarEnvio;
     private javax.swing.JButton btnCotizar;
     private javax.swing.JButton btnDescargarC;
     private javax.swing.JButton btnFactura;

@@ -32,6 +32,7 @@ public class ControladorCompra {
     
     String path;
     String totalPDF;
+    int noF = 0;
     
     public String Cotizar(String depaO, String muniO, String direccionO, String deparD, String muniD, String direccionD, String cantidad, String peso, String tipoRegion) {
         double total = 0;
@@ -62,10 +63,10 @@ public class ControladorCompra {
         double totalC = Double.parseDouble(Cotizar( depaO,  muniO,  direccionO,  deparD,  muniD,  direccionD,  cantidad,  peso,  tipoRegion));
         if(tipoPago.equalsIgnoreCase("Contra entrega")) {
             totalC = totalC +5;
-            arrayCompra.add(new Compras(depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
+            arrayCompra.add(new Compras(String.valueOf(noF+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
             
         } else if (tipoPago.equalsIgnoreCase("con tarjeta")) {
-            arrayCompra.add(new Compras(depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago,numeroT, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
+            arrayCompra.add(new Compras(String.valueOf(noF+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago,numeroT, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
         }
         
     }
@@ -101,7 +102,7 @@ public class ControladorCompra {
         LimpiarArray();
         for(Compras c: arrayCompra) {
             if(c.getUsuario().equals(usuario.UsuarioLogeado().getCorreo())) {
-                arrayCompraUsuario.add(new Compras(c.getDepartamentoO(),c.getMuicipioO(),c.getDepartamentoO(), c.getDepartamentoD(), c.getMunicipioD(), c.getDireccionD(), c.getIdPaquete(), c.getTipoServicio(),c.getNumeroP(),c.getPesoP(), c.getTipoPago(),c.getNumeroTarjeta(), c.getDatosFacturacion(),c.getTotal(), c.getUsuario()));
+                arrayCompraUsuario.add(new Compras(c.getNoFactura(),c.getDepartamentoO(),c.getMuicipioO(),c.getDepartamentoO(), c.getDepartamentoD(), c.getMunicipioD(), c.getDireccionD(), c.getIdPaquete(), c.getTipoServicio(),c.getNumeroP(),c.getPesoP(), c.getTipoPago(),c.getNumeroTarjeta(), c.getDatosFacturacion(),c.getTotal(), c.getUsuario()));
             }
         }
     }
@@ -253,7 +254,7 @@ public class ControladorCompra {
             
             contenido.close();
             
-            documento.save("src/pdf/"+path);
+            documento.save("src/documentos/pdf/"+path);
             documento.close();
             
             totalPDF = "";
@@ -265,7 +266,7 @@ public class ControladorCompra {
     
     public void AbrirPDF() {
         try {
-            File file = new File("src/pdf/"+path);
+            File file = new File("src/documentos/pdf/"+path);
             Desktop.getDesktop().open(file);
         } catch(Exception ex) {
             System.out.println(ex);
@@ -304,9 +305,9 @@ public class ControladorCompra {
         codigoHTML.append("<title>Factura"+compraF.getIdPaquete()+"</title>");
         codigoHTML.append("</head>");
         codigoHTML.append("<body style=\"margin-left: 250px; margin-right: 250px; border: solid #3f578d; border-radius: 10px;\">");
-        codigoHTML.append("<h1 style=\"text-align:center; font-size:75px;\">Factura No. 123468</h1>");
+        codigoHTML.append("<h1 style=\"text-align:center; font-size:75px;\">Factura No. "+compraF.getNoFactura()+"</h1>");
         codigoHTML.append("<div style=\"display: grid; grid-column: 2; grid-row: 1; grid-gap: 50px; margin: 35px;\">");
-        codigoHTML.append("<img style=\"grid-column: 1/2;\" src=\"../img/U-delivery.png\" height=\"274px\" width=\"459\">");
+        codigoHTML.append("<img style=\"grid-column: 1/2;\" src=\"../../img/U-delivery.png\" height=\"274px\" width=\"459\">");
         codigoHTML.append("<div style=\"grid-column: 2/2; padding-top: 35px;\">");
         codigoHTML.append("<h2>NIT: "+nit+"</h2>");
         codigoHTML.append("<h2>Nombre: "+nombreF+"</h2>");
@@ -348,7 +349,57 @@ public class ControladorCompra {
         codigoHTML.append("</html>");
         
         try {
-            File file = new File("src/pdf/Factura-"+compraF.getIdPaquete()+".html");
+            File file = new File("src/documentos/facturas/Factura-"+compraF.getIdPaquete()+".html");
+            FileWriter html = new FileWriter(file);
+            html.write(codigoHTML.toString());
+            html.close();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public void GenerarGuia(String codigoPaquete) {
+        Compras compraF;
+        String nombreD = "";
+        StringBuilder codigoHTML = new StringBuilder();
+        
+        compraF = FacturaSeleccionada(codigoPaquete);
+        
+        for(DatosFacturacion df: controladorDF.ObtenerDatos()) {
+            if((df.getNombre()+" "+df.getApellido()+", "+df.getDireccion()).equals(compraF.getDatosFacturacion())) {
+                nombreD = df.getNombre()+" "+df.getApellido();
+            }
+        }
+        
+        codigoHTML.append("<html>");
+        codigoHTML.append("<head>");
+        codigoHTML.append("<link href='https://fonts.googleapis.com/css?family=Libre Barcode 39' rel='stylesheet'>");
+        codigoHTML.append("<title>Guía "+compraF.getIdPaquete()+"</title>");
+        codigoHTML.append("</head>");
+        codigoHTML.append("<body style=\"margin-left: 250px; margin-right: 250px; border: solid #3f578d; border-radius: 10px;\">");
+        codigoHTML.append("<h1 style=\"text-align:center; font-size:75px;\">Guía "+compraF.getIdPaquete()+"</h1>");
+        codigoHTML.append("<div style=\"margin: 0px 200px 30px 200px; border: solid #7293e7; padding: 25px; display: grid; grid-column: 2;\">");
+        codigoHTML.append("<div style=\"grid-column: 1/2; margin-right: 35px;\">");
+        codigoHTML.append("<h2>ORIGEN: "+compraF.getDepartamentoO()+" / "+compraF.getMuicipioO()+"</h2>");
+        codigoHTML.append("<h2>DESTINO: "+compraF.getDepartamentoD()+" / "+compraF.getMunicipioD()+"</h2>");
+        codigoHTML.append("<h2>NOMBRE DE ORIGEN: "+usuario.UsuarioLogeado().getNombre()+" "+usuario.UsuarioLogeado().getApellido()+"</h2>");
+        codigoHTML.append("<h2>NOMBRE DESTINO: "+nombreD+"</h2>");
+        codigoHTML.append("</div>");
+        codigoHTML.append("<div style=\"grid-column: 2/2; border-left: solid #7293e7; align-items: center; display: flex; align-items: center; justify-content: center; flex-wrap: wrap;\">");
+        codigoHTML.append("<h2 style=\"text-align: center;\": center;\">CANTIDAD: "+compraF.getNumeroP()+"</h2>");
+        codigoHTML.append("<h2 style=\"text-align: center;\": center;\">TAMAÑO DE PAQUETE: "+compraF.getPesoP()+"</h2>");
+        codigoHTML.append("</div>");
+        codigoHTML.append("</div>");
+        codigoHTML.append("<div style=\"margin-right: 250px; margin-left: 250px; text-align: center;\">");
+        codigoHTML.append("<h2 style=\" margin: 0;\">CÓDIGO DE PAQUETE: "+compraF.getIdPaquete()+"</h2>");
+        codigoHTML.append("<p style=\"font-family: 'Libre Barcode 39';font-size: 200px; margin: 10px;\">"+compraF.getIdPaquete()+"</p>");
+        codigoHTML.append("</div>");
+        codigoHTML.append("</body>");
+        codigoHTML.append("</html>");
+        
+        try {
+            File file = new File("src/documentos/guias/Guia-"+compraF.getIdPaquete()+".html");
             FileWriter html = new FileWriter(file);
             html.write(codigoHTML.toString());
             html.close();

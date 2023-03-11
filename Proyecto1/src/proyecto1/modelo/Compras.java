@@ -5,6 +5,7 @@ package proyecto1.modelo;
  * @author JD
  */
 public class Compras {
+    private String noFactura;
     // ORIGEN
     private String departamentoO;
     private String muicipioO;
@@ -24,7 +25,8 @@ public class Compras {
     private String total;
     private String usuario;
 
-    public Compras(String departamentoO, String muicipioO, String direccionO, String departamentoD, String municipioD, String direccionD, String idPaquete, String tipoServicio, String numeroP, String pesoP, String tipoPago, String datosFacturacion, String total, String usuario) {
+    public Compras(String noFactura, String departamentoO, String muicipioO, String direccionO, String departamentoD, String municipioD, String direccionD, String idPaquete, String tipoServicio, String numeroP, String pesoP, String tipoPago, String datosFacturacion, String total, String usuario) {
+        this.noFactura = noFactura;
         this.departamentoO = departamentoO;
         this.muicipioO = muicipioO;
         this.direccionO = direccionO;
@@ -41,7 +43,8 @@ public class Compras {
         this.usuario = usuario;
     }
     
-    public Compras(String departamentoO, String muicipioO, String direccionO, String departamentoD, String municipioD, String direccionD, String idPaquete, String tipoServicio, String numeroP, String pesoP, String tipoPago, String numeroTarjeta, String datosFacturacion, String total, String usuario) {
+    public Compras(String noFactura, String departamentoO, String muicipioO, String direccionO, String departamentoD, String municipioD, String direccionD, String idPaquete, String tipoServicio, String numeroP, String pesoP, String tipoPago, String numeroTarjeta, String datosFacturacion, String total, String usuario) {
+        this.noFactura = noFactura;
         this.departamentoO = departamentoO;
         this.muicipioO = muicipioO;
         this.direccionO = direccionO;
@@ -59,6 +62,14 @@ public class Compras {
         this.usuario = usuario;
     }
 
+    public String getNoFactura() {
+        return noFactura;
+    }
+
+    public void setNoFactura(String noFactura) {
+        this.noFactura = noFactura;
+    }
+    
     public String getDepartamentoO() {
         return departamentoO;
     }
