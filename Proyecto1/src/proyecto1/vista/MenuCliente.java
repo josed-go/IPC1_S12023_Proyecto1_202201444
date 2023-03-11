@@ -1124,8 +1124,8 @@ public class MenuCliente extends javax.swing.JFrame {
 
     private void btnCancelarEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEnvioActionPerformed
         btnGuia.setVisible(false);
-            btnFactura.setVisible(false);
-            btnCancelarEnvio.setVisible(false);
+        btnFactura.setVisible(false);
+        btnCancelarEnvio.setVisible(false);
         tableE.clearSelection();
     }//GEN-LAST:event_btnCancelarEnvioActionPerformed
      
