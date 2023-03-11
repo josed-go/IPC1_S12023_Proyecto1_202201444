@@ -63,10 +63,10 @@ public class ControladorCompra {
         double totalC = Double.parseDouble(Cotizar( depaO,  muniO,  direccionO,  deparD,  muniD,  direccionD,  cantidad,  peso,  tipoRegion));
         if(tipoPago.equalsIgnoreCase("Contra entrega")) {
             totalC = totalC +5;
-            arrayCompra.add(new Compras(String.valueOf(noF+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
+            arrayCompra.add(new Compras(String.valueOf(arrayCompra.size()+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
             
         } else if (tipoPago.equalsIgnoreCase("con tarjeta")) {
-            arrayCompra.add(new Compras(String.valueOf(noF+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago,numeroT, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
+            arrayCompra.add(new Compras(String.valueOf(arrayCompra.size()+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago,numeroT, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
         }
         
     }
@@ -336,9 +336,9 @@ public class ControladorCompra {
         codigoHTML.append("</tr>");
         codigoHTML.append("<tr>");
         codigoHTML.append("<td>"+compraF.getDepartamentoO()+"</td>");
-        codigoHTML.append("<td>"+compraF.getMunicipioD()+"</td>");
-        codigoHTML.append("<td>"+compraF.getDepartamentoD()+"</td>");
         codigoHTML.append("<td>"+compraF.getMuicipioO()+"</td>");
+        codigoHTML.append("<td>"+compraF.getDepartamentoD()+"</td>");
+        codigoHTML.append("<td>"+compraF.getMunicipioD()+"</td>");
         codigoHTML.append("<td>"+compraF.getPesoP()+"</td>");
         codigoHTML.append("<td>"+compraF.getNumeroP()+"</td>");
         codigoHTML.append("<td>Q"+compraF.getTotal()+"</td>");
@@ -349,7 +349,7 @@ public class ControladorCompra {
         codigoHTML.append("</html>");
         
         try {
-            File file = new File("src/documentos/facturas/Factura-"+compraF.getIdPaquete()+".html");
+            File file = new File("src/documentos/facturas/Factura-No"+compraF.getNoFactura()+"-"+compraF.getIdPaquete()+".html");
             FileWriter html = new FileWriter(file);
             html.write(codigoHTML.toString());
             html.close();
