@@ -43,7 +43,7 @@ public class MenuCliente extends javax.swing.JFrame {
     ControladorRegion controladorR = new ControladorRegion();
     String totalcotizar;
     String totalC;
-    
+    String datosFE;
     ImageIcon image;
     
     public MenuCliente() {
@@ -96,6 +96,7 @@ public class MenuCliente extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtNITD = new javax.swing.JTextField();
         btnAgregarD = new javax.swing.JButton();
+        btnCancelarDF = new javax.swing.JButton();
         panel4 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -212,8 +213,12 @@ public class MenuCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableDF.setEnabled(false);
         tableDF.setFocusable(false);
+        tableDF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableDFMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tableDF);
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -244,6 +249,13 @@ public class MenuCliente extends javax.swing.JFrame {
             }
         });
 
+        btnCancelarDF.setText("CANCELAR");
+        btnCancelarDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarDFActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
         panel2Layout.setHorizontalGroup(
@@ -251,7 +263,8 @@ public class MenuCliente extends javax.swing.JFrame {
             .addGroup(panel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel2Layout.createSequentialGroup()
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9))
@@ -274,11 +287,10 @@ public class MenuCliente extends javax.swing.JFrame {
                                     .addComponent(jLabel10)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(txtDireccionD, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 150, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAgregarD)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAgregarD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCancelarDF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         panel2Layout.setVerticalGroup(
@@ -305,6 +317,8 @@ public class MenuCliente extends javax.swing.JFrame {
                             .addComponent(txtDireccionD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(5, 5, 5)
                         .addComponent(btnAgregarD)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelarDF)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
@@ -1077,20 +1091,39 @@ public class MenuCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFechaActionPerformed
 
     private void btnAgregarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDActionPerformed
-        if(ValidarCampos()) {
-            if(!controladorDF.ValidarDatos(txtDireccionD.getText())) {
-                controladorDF.AgregarDatos(txtNombreD.getText(), txtApellidoD.getText(), txtDireccionD.getText(), txtNITD.getText());
-                JOptionPane.showMessageDialog(this, "Datos agregados.");
-                LimpiarTextField();
-                controladorDF.DatosUsuario();
-                LlenarTablaDatos();
-                DatosFacturacion();
-            } else {
-                JOptionPane.showMessageDialog(this, "Ya existe esa dirección.");
+        if(btnAgregarD.getText().equals("AGREGAR")) {
+            if(ValidarCampos()) {
+                if(!controladorDF.ValidarDatos(txtDireccionD.getText())) {
+                    controladorDF.AgregarDatos(txtNombreD.getText(), txtApellidoD.getText(), txtDireccionD.getText(), txtNITD.getText());
+                    JOptionPane.showMessageDialog(this, "Datos agregados.");
+                    LimpiarTextField();
+                    controladorDF.DatosUsuario();
+                    LlenarTablaDatos();
+                    DatosFacturacion();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ya existe esa dirección.");
+                }
+            }else {
+                JOptionPane.showMessageDialog(this, "Debes rellenar todos los campos.");
             }
-        }else {
-            JOptionPane.showMessageDialog(this, "Debes rellenar todos los campos.");
-        }
+        } else if(btnAgregarD.getText().equals("EDITAR")) {
+            if(ValidarCampos()) {
+                if(!controladorDF.ValidarDatos(txtDireccionD.getText()) || datosFE.equals(txtDireccionD.getText())) {
+                    controladorDF.EditarDato((String)tableDF.getValueAt(tableDF.getSelectedRow(), 1),(String)tableDF.getValueAt(tableDF.getSelectedRow(), 2), (String)tableDF.getValueAt(tableDF.getSelectedRow(), 3), txtNombreD.getText(), txtApellidoD.getText(), txtDireccionD.getText(), txtNITD.getText());
+                    JOptionPane.showMessageDialog(this, "Datos editados.");
+                    LimpiarTextField();
+                    controladorDF.DatosUsuario();
+                    LlenarTablaDatos();
+                    DatosFacturacion();
+                    btnAgregarD.setText("AGREGAR");
+                    btnCancelarDF.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ya existe esa dirección.");
+                }
+            }else {
+                JOptionPane.showMessageDialog(this, "Debes rellenar todos los campos.");
+            }
+        }        
     }//GEN-LAST:event_btnAgregarDActionPerformed
 
     private void btnDescargarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarCActionPerformed
@@ -1128,6 +1161,26 @@ public class MenuCliente extends javax.swing.JFrame {
         btnCancelarEnvio.setVisible(false);
         tableE.clearSelection();
     }//GEN-LAST:event_btnCancelarEnvioActionPerformed
+
+    private void tableDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDFMouseClicked
+        if(tableDF.getSelectedRow() >= 0) {
+            DatosFacturacion df = controladorDF.ObtenerDato((String)tableDF.getValueAt(tableDF.getSelectedRow(), 1),(String)tableDF.getValueAt(tableDF.getSelectedRow(), 2), (String)tableDF.getValueAt(tableDF.getSelectedRow(), 3));
+            txtNombreD.setText(df.getNombre());
+            txtApellidoD.setText(df.getApellido());
+            txtDireccionD.setText(df.getDireccion());
+            txtNITD.setText(df.getNit());
+            btnAgregarD.setText("EDITAR");
+            btnCancelarDF.setVisible(true);
+            datosFE = (String)tableDF.getValueAt(tableDF.getSelectedRow(), 2);
+        }
+    }//GEN-LAST:event_tableDFMouseClicked
+
+    private void btnCancelarDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarDFActionPerformed
+        btnAgregarD.setText("AGREGAR");
+        btnCancelarDF.setVisible(false);
+        LimpiarTextField();
+        tableDF.clearSelection();
+    }//GEN-LAST:event_btnCancelarDFActionPerformed
      
     // METODOS PARA TARJETAS
     private boolean ValidarTextField() {
@@ -1253,6 +1306,7 @@ public class MenuCliente extends javax.swing.JFrame {
         opPConTarjeta.setActionCommand("Con tarjeta");
         btnFactura.setVisible(false);
         btnGuia.setVisible(false);
+        btnCancelarDF.setVisible(false);
     }   
     
     private void PrecioServicio() {
@@ -1390,6 +1444,7 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarD;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCancelarDF;
     private javax.swing.JButton btnCancelarEnvio;
     private javax.swing.JButton btnCotizar;
     private javax.swing.JButton btnDescargarC;
