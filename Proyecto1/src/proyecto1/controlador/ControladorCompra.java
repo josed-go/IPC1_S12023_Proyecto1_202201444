@@ -16,6 +16,7 @@ import java.util.Random;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import proyecto1.modelo.Compras;
 import proyecto1.modelo.DatosFacturacion;
+import proyecto1.modelo.Region;
 
 /**
  *
@@ -32,7 +33,7 @@ public class ControladorCompra {
     
     String path;
     String totalPDF;
-    int noF = 0;
+    static double totalIngresos;
     
     public String Cotizar(String depaO, String muniO, String direccionO, String deparD, String muniD, String direccionD, String cantidad, String peso, String tipoRegion) {
         double total = 0;
@@ -61,6 +62,9 @@ public class ControladorCompra {
     
     public void RealizarCompra(String depaO, String muniO, String direccionO, String deparD, String muniD, String direccionD, String cantidad, String peso, String tipoPago, String numeroT, String tipoRegion, String datosF) {
         double totalC = Double.parseDouble(Cotizar( depaO,  muniO,  direccionO,  deparD,  muniD,  direccionD,  cantidad,  peso,  tipoRegion));
+        Region reg = controladorR.ObtenerRegionSeleccionada(controladorD.ObtenerDepartamentoNombre(deparD).getCodigoRegion());
+        reg.setNumEnvios(reg.getNumEnvios()+1);
+        System.out.println(reg.getNumEnvios());
         if(tipoPago.equalsIgnoreCase("Contra entrega")) {
             totalC = totalC +5;
             arrayCompra.add(new Compras(String.valueOf(arrayCompra.size()+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
@@ -68,7 +72,11 @@ public class ControladorCompra {
         } else if (tipoPago.equalsIgnoreCase("con tarjeta")) {
             arrayCompra.add(new Compras(String.valueOf(arrayCompra.size()+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago,numeroT, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
         }
-        
+        totalIngresos = totalIngresos+totalC;
+    }
+    
+    public double ObtenerIngreso() {
+        return totalIngresos;
     }
     
     public String CodigoPaquete() {

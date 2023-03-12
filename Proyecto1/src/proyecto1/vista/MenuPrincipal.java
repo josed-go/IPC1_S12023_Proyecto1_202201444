@@ -162,6 +162,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnReportes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(21, 35, 61), 2));
         pnReportes.setPreferredSize(new java.awt.Dimension(133, 133));
         pnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnReportesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnReportesMouseEntered(evt);
             }
@@ -345,6 +348,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         DepartamentoVista vistaD = new DepartamentoVista();
         vistaD.setVisible(true);
     }//GEN-LAST:event_pnDepartamentosMouseClicked
+
+    private void pnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnReportesMouseClicked
+        this.setVisible(false);
+        Reportes report = new Reportes();
+        report.setVisible(true);
+    }//GEN-LAST:event_pnReportesMouseClicked
 
     private void setImageLabel(JLabel labelName, String root) {
         image = new ImageIcon(root);

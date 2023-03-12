@@ -9,12 +9,14 @@ public class Region {
     private String nombre;
     private double estandar;
     private double especial;
+    private int numEnvios;
     
-    public Region(String codigo, String nombre, double estandar, double especial) {
+    public Region(String codigo, String nombre, double estandar, double especial, int numEnvios) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.estandar = estandar;
         this.especial = especial;
+        this.numEnvios = numEnvios;
     }
 
     public String getCodigo() {
@@ -47,6 +49,14 @@ public class Region {
 
     public void setEspecial(double especial) {
         this.especial = especial;
+    }
+
+    public int getNumEnvios() {
+        return numEnvios;
+    }
+
+    public void setNumEnvios(int numEnvios) {
+        this.numEnvios = numEnvios;
     }
     
 }

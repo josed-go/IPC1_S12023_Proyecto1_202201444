@@ -12,12 +12,12 @@ public class ControladorRegion {
     static ArrayList<Region> arrayRegion = new ArrayList<>();
     
     public void CrearRegiones() {
-        arrayRegion.add(new Region("M", "Metropolitana", 35,25));
-        arrayRegion.add(new Region("NT", "Norte", 68.5,45.55));
-        arrayRegion.add(new Region("NO", "Nororiente", 58.69,35.48));
-        arrayRegion.add(new Region("SO", "Suroriente", 38.68,32.48));
-        arrayRegion.add(new Region("SOC", "Suroccidente", 34,29));
-        arrayRegion.add(new Region("NOC", "Noroccidente", 44.5,40));
+        arrayRegion.add(new Region("M", "Metropolitana", 35,25, 0));
+        arrayRegion.add(new Region("NT", "Norte", 68.5,45.55,0));
+        arrayRegion.add(new Region("NO", "Nororiente", 58.69,35.48,0));
+        arrayRegion.add(new Region("SO", "Suroriente", 38.68,32.48,0));
+        arrayRegion.add(new Region("SOC", "Suroccidente", 34,29,0));
+        arrayRegion.add(new Region("NOC", "Noroccidente", 44.5,40,0));
     }
     
     public void EditarPrecio(String codigo, double pEstandar, double pEspecial) {
