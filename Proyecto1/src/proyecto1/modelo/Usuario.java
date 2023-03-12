@@ -18,8 +18,9 @@ public class Usuario {
     private String rol;
     private String foto;
     private String codigoKiosco;
+    private int paquetesEnviados;
 
-    public Usuario(String correo, String nombre, String apellido, String password, String dpi, String fechaC, String genero, String nacionalidad, String usuario, String telefono, String rol, String foto) {
+    public Usuario(String correo, String nombre, String apellido, String password, String dpi, String fechaC, String genero, String nacionalidad, String usuario, String telefono, String rol, String foto, int paquetesEnviados) {
         this.correo = correo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -32,9 +33,10 @@ public class Usuario {
         this.telefono = telefono;
         this.rol = rol;
         this.foto = foto;
+        this.paquetesEnviados = paquetesEnviados;
     }
     
-    public Usuario(String correo, String nombre, String apellido, String password, String dpi, String fechaC, String genero, String nacionalidad, String usuario, String telefono, String rol, String foto, String codigoKiosco) {
+    public Usuario(String correo, String nombre, String apellido, String password, String dpi, String fechaC, String genero, String nacionalidad, String usuario, String telefono, String rol, String foto, String codigoKiosco, int paquetesEnviados) {
         this.correo = correo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -48,6 +50,7 @@ public class Usuario {
         this.rol = rol;
         this.foto = foto;
         this.codigoKiosco = codigoKiosco;
+        this.paquetesEnviados = paquetesEnviados;
     }
     
     public Usuario() {
@@ -159,6 +162,14 @@ public class Usuario {
 
     public void setCodigoKiosco(String codigoKiosco) {
         this.codigoKiosco = codigoKiosco;
+    }
+
+    public int getPaquetesEnviados() {
+        return paquetesEnviados;
+    }
+
+    public void setPaquetesEnviados(int paquetesEnviados) {
+        this.paquetesEnviados = paquetesEnviados;
     }
     
 }

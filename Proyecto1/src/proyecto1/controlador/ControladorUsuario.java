@@ -38,9 +38,9 @@ public class ControladorUsuario {
         
         if(!usuarioCreado) {
             if(rol.equals("Individual")) {
-                arrayUser.add(new Usuario(correo, nombre, apellido, password, dpi, fechaC, genero, nacionalidad, usuario, telefono, rol, foto));
+                arrayUser.add(new Usuario(correo, nombre, apellido, password, dpi, fechaC, genero, nacionalidad, usuario, telefono, rol, foto, 0));
             } else if(rol.equals("Kiosco")) {
-                arrayUser.add(new Usuario(correo, nombre, apellido, password, dpi, fechaC, genero, nacionalidad, usuario, telefono, rol, foto, codigoKiosco));
+                arrayUser.add(new Usuario(correo, nombre, apellido, password, dpi, fechaC, genero, nacionalidad, usuario, telefono, rol, foto, codigoKiosco, 0));
             }
             
             return usuarioCreado;

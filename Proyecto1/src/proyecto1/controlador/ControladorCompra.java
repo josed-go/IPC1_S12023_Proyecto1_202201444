@@ -75,6 +75,8 @@ public class ControladorCompra {
         }
         totalIngresos = totalIngresos+totalC;
         cantidadPaquetes = cantidadPaquetes+Integer.parseInt(cantidad);
+        
+        usuario.UsuarioLogeado().setPaquetesEnviados(usuario.UsuarioLogeado().getPaquetesEnviados()+Integer.parseInt(cantidad));
     }
     
     public double ObtenerIngreso() {
