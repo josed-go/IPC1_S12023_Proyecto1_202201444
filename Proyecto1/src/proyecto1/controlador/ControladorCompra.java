@@ -118,7 +118,7 @@ public class ControladorCompra {
     public void DescargarCotizacion(String deparO, String muniO, String deparD, String muniD, String tamanio, String cantidad, String servicio  ) {
         try(PDDocument documento = new PDDocument()) {
             
-            path = "Cotizacion_"+CodigoPaquete()+usuario.UsuarioLogeado().getNombre()+".pdf";
+            path = "Cotizacion_"+CodigoPaquete()+"-"+usuario.UsuarioLogeado().getNombre()+".pdf";
             
              //CREA UN DOCUMENTO
             PDPage pagina = new PDPage(PDRectangle.LETTER); // CREA UNA PAGINA
