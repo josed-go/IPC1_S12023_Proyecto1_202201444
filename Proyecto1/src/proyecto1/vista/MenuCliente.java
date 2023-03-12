@@ -49,7 +49,7 @@ public class MenuCliente extends javax.swing.JFrame {
     
     public MenuCliente() {
         initComponents();
-        lblSaludo.setText("BIENVENID@ "+controladorU.UsuarioLogeado().getNombre().toUpperCase());
+        lblSaludo.setText("BIENVENID@ "+controladorU.UsuarioLogeado().getUsuario().toUpperCase());
         tabbed.addTab("TARJETAS", panel1);
         tabbed.addTab("DATOS FACTURACIÓN", panel2);
         tabbed.addTab("COTIZACIÓN, PAGO Y FACTURA", panel3);
