@@ -1347,6 +1347,9 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="lblImagen">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblImagenMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

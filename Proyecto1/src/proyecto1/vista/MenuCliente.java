@@ -936,6 +936,12 @@ public class MenuCliente extends javax.swing.JFrame {
 
         tabbed.addTab("tab3", panel3);
 
+        lblImagen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblImagenMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1254,6 +1260,12 @@ public class MenuCliente extends javax.swing.JFrame {
         LimpiarTextField();
         tableT.clearSelection();
     }//GEN-LAST:event_btnCancelarTActionPerformed
+
+    private void lblImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblImagenMouseClicked
+        this.setVisible(false);
+        Perfil vistaP = new Perfil();
+        vistaP.setVisible(true);
+    }//GEN-LAST:event_lblImagenMouseClicked
      
     // METODOS PARA TARJETAS
     private boolean ValidarTextField() {

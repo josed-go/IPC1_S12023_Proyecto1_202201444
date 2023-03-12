@@ -49,6 +49,46 @@ public class ControladorUsuario {
         return usuarioCreado;
     }
     
+    public void EditarUsuarioCliente(String nombre, String apellido, String pass, String dpi, String fechaC, String genero, String nacionalidad, String usuario, String telefono, String foto) {
+        for(Usuario u: arrayUser) {
+            if(u.getCorreo().equals(UsuarioLogeado().getCorreo())){
+                if(ValidarPassword(pass)) {
+                    u.setNombre(nombre);
+                    u.setApellido(apellido);
+                    u.setPassword(pass);
+                    u.setDpi(dpi);
+                    u.setFechaC(fechaC);
+                    u.setGenero(genero);
+                    u.setNacionalidad(nacionalidad);
+                    u.setUsuario(usuario);
+                    u.setTelefono(telefono);
+                    u.setFoto(foto);
+                }
+            }
+        }
+    }
+    
+    public void EditarUsuarioKiosco(String nombre, String apellido, String pass, String dpi, String fechaC, String genero, String nacionalidad, String usuario, String telefono, String foto, String codiKiosco) {
+        for(Usuario u: arrayUser) {
+            if(u.getCorreo().equals(UsuarioLogeado().getCorreo())){
+                if(ValidarPassword(pass)) {
+                    u.setNombre(nombre);
+                    u.setApellido(apellido);
+                    u.setPassword(pass);
+                    u.setDpi(dpi);
+                    u.setFechaC(fechaC);
+                    u.setGenero(genero);
+                    u.setNacionalidad(nacionalidad);
+                    u.setUsuario(usuario);
+                    u.setTelefono(telefono);
+                    u.setFoto(foto);
+                    u.setCodigoKiosco(codiKiosco);
+                }
+            }
+        }
+    }
+        
+    
     public boolean ValidarPassword(String pass) {
         String b;
         int cont1 = 0, cont2 = 0, cont3 = 0, cont4 = 0;

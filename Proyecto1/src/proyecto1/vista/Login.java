@@ -151,7 +151,7 @@ public class Login extends javax.swing.JFrame {
                     this.setVisible(false);
                     MenuPrincipal menu = new MenuPrincipal();
                     menu.setVisible(true);
-                } else if(user.UsuarioLogeado().getRol().equals("Individual")) {
+                } else if(user.UsuarioLogeado().getRol().equals("Individual") || user.UsuarioLogeado().getRol().equals("Kiosco")) {
                     this.setVisible(false);
                     MenuCliente menuC = new MenuCliente();
                     menuC.setVisible(true);
