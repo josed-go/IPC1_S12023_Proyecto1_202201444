@@ -45,7 +45,8 @@ public class Reportes extends javax.swing.JFrame {
         panelR = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         panelP = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblPaquetes = new javax.swing.JLabel();
         panelI = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         lblIngresos = new javax.swing.JLabel();
@@ -135,23 +136,34 @@ public class Reportes extends javax.swing.JFrame {
 
         tab.addTab("tab1", panelR);
 
-        jLabel3.setText("lnl2");
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel4.setText("CANTIDAD DE PAQUETES");
+
+        lblPaquetes.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblPaquetes.setText("0 PAQUETES");
 
         javax.swing.GroupLayout panelPLayout = new javax.swing.GroupLayout(panelP);
         panelP.setLayout(panelPLayout);
         panelPLayout.setHorizontalGroup(
             panelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPLayout.createSequentialGroup()
-                .addContainerGap(343, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(294, 294, 294))
+            .addGroup(panelPLayout.createSequentialGroup()
+                .addGroup(panelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPLayout.createSequentialGroup()
+                        .addGap(169, 169, 169)
+                        .addComponent(jLabel4))
+                    .addGroup(panelPLayout.createSequentialGroup()
+                        .addGap(245, 245, 245)
+                        .addComponent(lblPaquetes)))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         panelPLayout.setVerticalGroup(
             panelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPLayout.createSequentialGroup()
-                .addGap(171, 171, 171)
-                .addComponent(jLabel3)
-                .addContainerGap(308, Short.MAX_VALUE))
+                .addGap(92, 92, 92)
+                .addComponent(jLabel4)
+                .addGap(39, 39, 39)
+                .addComponent(lblPaquetes)
+                .addContainerGap(299, Short.MAX_VALUE))
         );
 
         tab.addTab("tab2", panelP);
@@ -228,7 +240,7 @@ public class Reportes extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(tab, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
+                .addComponent(tab)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -253,6 +265,7 @@ public class Reportes extends javax.swing.JFrame {
     private void btnPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaqueteActionPerformed
         lblTitulo.setText("Número total de paquetes enviados");
         tab.setSelectedIndex(1);
+        lblPaquetes.setText(String.valueOf(controladorC.ObtenerPaquetes())+" PAQUETES");
     }//GEN-LAST:event_btnPaqueteActionPerformed
 
     private void btnIngresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresosActionPerformed
@@ -314,13 +327,14 @@ public class Reportes extends javax.swing.JFrame {
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblIngresos;
+    private javax.swing.JLabel lblPaquetes;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelI;
     private javax.swing.JPanel panelP;

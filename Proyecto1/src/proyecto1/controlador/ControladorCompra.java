@@ -34,6 +34,7 @@ public class ControladorCompra {
     String path;
     String totalPDF;
     static double totalIngresos;
+    static int cantidadPaquetes;
     
     public String Cotizar(String depaO, String muniO, String direccionO, String deparD, String muniD, String direccionD, String cantidad, String peso, String tipoRegion) {
         double total = 0;
@@ -64,7 +65,7 @@ public class ControladorCompra {
         double totalC = Double.parseDouble(Cotizar( depaO,  muniO,  direccionO,  deparD,  muniD,  direccionD,  cantidad,  peso,  tipoRegion));
         Region reg = controladorR.ObtenerRegionSeleccionada(controladorD.ObtenerDepartamentoNombre(deparD).getCodigoRegion());
         reg.setNumEnvios(reg.getNumEnvios()+1);
-        System.out.println(reg.getNumEnvios());
+        
         if(tipoPago.equalsIgnoreCase("Contra entrega")) {
             totalC = totalC +5;
             arrayCompra.add(new Compras(String.valueOf(arrayCompra.size()+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
@@ -73,10 +74,15 @@ public class ControladorCompra {
             arrayCompra.add(new Compras(String.valueOf(arrayCompra.size()+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago,numeroT, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
         }
         totalIngresos = totalIngresos+totalC;
+        cantidadPaquetes = cantidadPaquetes+Integer.parseInt(cantidad);
     }
     
     public double ObtenerIngreso() {
         return totalIngresos;
+    }
+    
+    public int ObtenerPaquetes() {
+        return cantidadPaquetes;
     }
     
     public String CodigoPaquete() {
