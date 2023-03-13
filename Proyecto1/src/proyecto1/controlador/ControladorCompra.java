@@ -4,6 +4,10 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -68,10 +72,10 @@ public class ControladorCompra {
         
         if(tipoPago.equalsIgnoreCase("Contra entrega")) {
             totalC = totalC +5;
-            arrayCompra.add(new Compras(String.valueOf(arrayCompra.size()+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
+            arrayCompra.add(new Compras(String.valueOf(arrayCompra.size()+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo(), String.valueOf(LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)), String.valueOf(LocalTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME)) ));
             
         } else if (tipoPago.equalsIgnoreCase("con tarjeta")) {
-            arrayCompra.add(new Compras(String.valueOf(arrayCompra.size()+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago,numeroT, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo() ));
+            arrayCompra.add(new Compras(String.valueOf(arrayCompra.size()+1),depaO, muniO, direccionO, deparD, muniD, direccionD, "IPC1D"+CodigoPaquete(), tipoRegion, cantidad, peso, tipoPago,numeroT, datosF, String.valueOf(totalC), usuario.UsuarioLogeado().getCorreo(),  String.valueOf(LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)), String.valueOf(LocalTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME))));
         }
         totalIngresos = totalIngresos+totalC;
         cantidadPaquetes = cantidadPaquetes+Integer.parseInt(cantidad);
@@ -118,7 +122,7 @@ public class ControladorCompra {
         LimpiarArray();
         for(Compras c: arrayCompra) {
             if(c.getUsuario().equals(usuario.UsuarioLogeado().getCorreo())) {
-                arrayCompraUsuario.add(new Compras(c.getNoFactura(),c.getDepartamentoO(),c.getMuicipioO(),c.getDepartamentoO(), c.getDepartamentoD(), c.getMunicipioD(), c.getDireccionD(), c.getIdPaquete(), c.getTipoServicio(),c.getNumeroP(),c.getPesoP(), c.getTipoPago(),c.getNumeroTarjeta(), c.getDatosFacturacion(),c.getTotal(), c.getUsuario()));
+                arrayCompraUsuario.add(new Compras(c.getNoFactura(),c.getDepartamentoO(),c.getMuicipioO(),c.getDepartamentoO(), c.getDepartamentoD(), c.getMunicipioD(), c.getDireccionD(), c.getIdPaquete(), c.getTipoServicio(),c.getNumeroP(),c.getPesoP(), c.getTipoPago(),c.getNumeroTarjeta(), c.getDatosFacturacion(),c.getTotal(), c.getUsuario(), c.getfecha(), c.getHora()));
             }
         }
     }
@@ -332,13 +336,20 @@ public class ControladorCompra {
         codigoHTML.append("</div>");
         codigoHTML.append("</div>");
         codigoHTML.append("<hr style=\"margin: 35px;\">");
+        codigoHTML.append("<div style=\"display: grid; grid-column: 2;\">");
+        codigoHTML.append("<div style=\"grid-column: 1/2; align-items: center;\">");
         codigoHTML.append("<h2 style=\"margin: 35px;\">Codigo de paquete: "+compraF.getIdPaquete()+"</h2>");
         if(compraF.getTipoPago().equalsIgnoreCase("Contra entrega")) {
             codigoHTML.append("<h2 style=\"margin: 35px;\">Recargo de Q5.00</h2>");
         } else if(compraF.getTipoPago().equalsIgnoreCase("Con tarjeta")) {
             codigoHTML.append("<h2 style=\"margin: 35px;\">Numero tarjeta: "+compraF.getNumeroTarjeta()+"</h2>");
         }
-        
+        codigoHTML.append("</div>");
+        codigoHTML.append("<div style=\"grid-column: 2/2;\">");
+        codigoHTML.append("<h2 style=\"margin: 35px;  text-align: right;\">Fecha: "+compraF.getfecha()+"</h2>");
+        codigoHTML.append("<h2 style=\"margin: 35px;  text-align: right;\">Hora: "+compraF.getHora()+"</h2>");
+        codigoHTML.append("</div>");
+        codigoHTML.append("</div>");
         codigoHTML.append("<div style=\"margin: 35px; text-align: center; align-items: center; \">");
         codigoHTML.append("<table style=\"margin: 0 auto; width: 100%;\" border=\"1\">");
         codigoHTML.append("<tr style=\"background-color: #acd3ff ;\">");
@@ -390,6 +401,7 @@ public class ControladorCompra {
         
         codigoHTML.append("<html>");
         codigoHTML.append("<head>");
+        codigoHTML.append("<meta charset=\"UTF-8\">");
         codigoHTML.append("<link href='https://fonts.googleapis.com/css?family=Libre Barcode 39' rel='stylesheet'>");
         codigoHTML.append("<title>Guía "+compraF.getIdPaquete()+"</title>");
         codigoHTML.append("</head>");
@@ -401,6 +413,8 @@ public class ControladorCompra {
         codigoHTML.append("<h2>DESTINO: "+compraF.getDepartamentoD()+" / "+compraF.getMunicipioD()+"</h2>");
         codigoHTML.append("<h2>NOMBRE DE ORIGEN: "+usuario.UsuarioLogeado().getNombre()+" "+usuario.UsuarioLogeado().getApellido()+"</h2>");
         codigoHTML.append("<h2>NOMBRE DESTINO: "+nombreD+"</h2>");
+        codigoHTML.append("<h2>FECHA: "+compraF.getfecha()+"</h2>");
+        codigoHTML.append("<h2>FECHA: "+compraF.getHora()+"</h2>");
         codigoHTML.append("</div>");
         codigoHTML.append("<div style=\"grid-column: 2/2; border-left: solid #7293e7; align-items: center; display: flex; align-items: center; justify-content: center; flex-wrap: wrap;\">");
         codigoHTML.append("<h2 style=\"text-align: center;\": center;\">CANTIDAD: "+compraF.getNumeroP()+"</h2>");

@@ -24,8 +24,10 @@ public class Compras {
     private String datosFacturacion;
     private String total;
     private String usuario;
+    private String fecha;
+    private String hora;
 
-    public Compras(String noFactura, String departamentoO, String muicipioO, String direccionO, String departamentoD, String municipioD, String direccionD, String idPaquete, String tipoServicio, String numeroP, String pesoP, String tipoPago, String datosFacturacion, String total, String usuario) {
+    public Compras(String noFactura, String departamentoO, String muicipioO, String direccionO, String departamentoD, String municipioD, String direccionD, String idPaquete, String tipoServicio, String numeroP, String pesoP, String tipoPago, String datosFacturacion, String total, String usuario, String fecha, String hora) {
         this.noFactura = noFactura;
         this.departamentoO = departamentoO;
         this.muicipioO = muicipioO;
@@ -41,9 +43,11 @@ public class Compras {
         this.datosFacturacion = datosFacturacion;
         this.total = total;
         this.usuario = usuario;
+        this.fecha = fecha;
+        this.hora = hora;
     }
     
-    public Compras(String noFactura, String departamentoO, String muicipioO, String direccionO, String departamentoD, String municipioD, String direccionD, String idPaquete, String tipoServicio, String numeroP, String pesoP, String tipoPago, String numeroTarjeta, String datosFacturacion, String total, String usuario) {
+    public Compras(String noFactura, String departamentoO, String muicipioO, String direccionO, String departamentoD, String municipioD, String direccionD, String idPaquete, String tipoServicio, String numeroP, String pesoP, String tipoPago, String numeroTarjeta, String datosFacturacion, String total, String usuario, String fecha, String hora) {
         this.noFactura = noFactura;
         this.departamentoO = departamentoO;
         this.muicipioO = muicipioO;
@@ -60,6 +64,8 @@ public class Compras {
         this.datosFacturacion = datosFacturacion;
         this.total = total;
         this.usuario = usuario;
+        this.fecha = fecha;
+        this.hora = hora;
     }
 
     public String getNoFactura() {
@@ -189,6 +195,20 @@ public class Compras {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-    
-    
+
+    public String getfecha() {
+        return fecha;
+    }
+
+    public void setfecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
 }
