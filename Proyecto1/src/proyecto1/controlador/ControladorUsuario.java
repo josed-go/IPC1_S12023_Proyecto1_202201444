@@ -1,6 +1,8 @@
 package proyecto1.controlador;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import proyecto1.modelo.Usuario;
 
 /**
@@ -10,6 +12,7 @@ import proyecto1.modelo.Usuario;
 public class ControladorUsuario {
     
     static ArrayList<Usuario> arrayUser = new ArrayList<>();
+    static ArrayList<Usuario> usuariosOrdenados = new ArrayList<>();;
     static Usuario userLogeado = new Usuario();
     
     public void CrearAdmin() {
@@ -88,6 +91,12 @@ public class ControladorUsuario {
         }
     }
         
+    public ArrayList<Usuario> OrdenarUsuarios() {
+        usuariosOrdenados = arrayUser;
+        Collections.sort(usuariosOrdenados);
+        usuariosOrdenados.sort((o1, o2) -> o1.compareTo(o2));
+        return usuariosOrdenados;
+    }
     
     public boolean ValidarPassword(String pass) {
         String b;

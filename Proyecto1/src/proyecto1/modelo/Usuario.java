@@ -4,7 +4,7 @@ package proyecto1.modelo;
  *
  * @author JD
  */
-public class Usuario {
+public class Usuario implements Comparable<Usuario> {
     private String correo;
     private String nombre;
     private String apellido;
@@ -170,6 +170,11 @@ public class Usuario {
 
     public void setPaquetesEnviados(int paquetesEnviados) {
         this.paquetesEnviados = paquetesEnviados;
+    }
+
+    @Override
+    public int compareTo(Usuario o) {
+        return (this.getPaquetesEnviados() > o.getPaquetesEnviados() ? -1: (this.getPaquetesEnviados() == o.getPaquetesEnviados() ? 0: 1));
     }
     
 }

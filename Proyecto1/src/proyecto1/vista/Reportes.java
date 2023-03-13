@@ -4,7 +4,11 @@
  */
 package proyecto1.vista;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import proyecto1.controlador.ControladorCompra;
+import proyecto1.controlador.ControladorUsuario;
+import proyecto1.modelo.Usuario;
 
 /**
  *
@@ -17,6 +21,7 @@ public class Reportes extends javax.swing.JFrame {
      */
     
     ControladorCompra controladorC = new ControladorCompra();
+    ControladorUsuario controladorU = new ControladorUsuario();
     
     public Reportes() {
         initComponents();
@@ -51,7 +56,8 @@ public class Reportes extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         lblIngresos = new javax.swing.JLabel();
         panelU = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableU = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -200,24 +206,46 @@ public class Reportes extends javax.swing.JFrame {
 
         tab.addTab("tab3", panelI);
 
-        jLabel5.setText("lbl4");
-        jLabel5.setToolTipText("");
+        tableU.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "NO.", "CORREO", "USUARIO", "PAQUETES ENVIADOS"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableU);
 
         javax.swing.GroupLayout panelULayout = new javax.swing.GroupLayout(panelU);
         panelU.setLayout(panelULayout);
         panelULayout.setHorizontalGroup(
             panelULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelULayout.createSequentialGroup()
-                .addContainerGap(390, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(247, 247, 247))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelULayout.setVerticalGroup(
             panelULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelULayout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addComponent(jLabel5)
-                .addContainerGap(373, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         tab.addTab("tab4", panelU);
@@ -282,8 +310,25 @@ public class Reportes extends javax.swing.JFrame {
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         lblTitulo.setText("Lista de usuarios con más paquetes enviados.");
         tab.setSelectedIndex(3);
+        TablaUsuarios();
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
+    private void TablaUsuarios() {
+        DefaultTableModel modelo = new DefaultTableModel(new String[]{"NO.", "CORREO", "USUARIO", "PAQUETES ENVIADOS"}, controladorU.OrdenarUsuarios().size()-1);
+        tableU.setModel(modelo);
+        
+        TableModel modeloDatos = tableU.getModel();
+        for(int i = 0; i < controladorU.OrdenarUsuarios().size(); i++) {
+            Usuario user = controladorU.OrdenarUsuarios().get(i);
+            if(!user.getRol().equals("ADMIN")) {
+                modeloDatos.setValueAt(i+1, i, 0);
+                modeloDatos.setValueAt(user.getCorreo(), i, 1);
+                modeloDatos.setValueAt(user.getUsuario(), i, 2);
+                modeloDatos.setValueAt(user.getPaquetesEnviados(), i, 3);
+            }            
+        } 
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -328,10 +373,10 @@ public class Reportes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblIngresos;
     private javax.swing.JLabel lblPaquetes;
@@ -341,5 +386,6 @@ public class Reportes extends javax.swing.JFrame {
     private javax.swing.JPanel panelR;
     private javax.swing.JPanel panelU;
     private javax.swing.JTabbedPane tab;
+    private javax.swing.JTable tableU;
     // End of variables declaration//GEN-END:variables
 }
