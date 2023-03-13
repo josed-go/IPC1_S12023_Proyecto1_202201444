@@ -1,6 +1,7 @@
 package proyecto1.controlador;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import proyecto1.modelo.Region;
 
 /**
@@ -10,6 +11,7 @@ import proyecto1.modelo.Region;
 public class ControladorRegion {
     
     static ArrayList<Region> arrayRegion = new ArrayList<>();
+    static ArrayList<Region> regionOrdenadas = new ArrayList<>();
     
     public void CrearRegiones() {
         arrayRegion.add(new Region("M", "Metropolitana", 35,25, 0));
@@ -42,6 +44,14 @@ public class ControladorRegion {
     
     public ArrayList<Region> ObtenerRegiones() {
         return arrayRegion;
+    }
+    
+    public ArrayList<Region> RegionesOdenadas() {
+        regionOrdenadas = arrayRegion;
+
+        Collections.sort(regionOrdenadas);
+        regionOrdenadas.sort((o1, o2) -> o1.compareTo(o2));
+        return regionOrdenadas;
     }
     
     public Region ObtenerRegionSeleccionada(String codigo) {

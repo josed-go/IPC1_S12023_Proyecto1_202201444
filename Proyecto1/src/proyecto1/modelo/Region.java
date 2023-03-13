@@ -4,7 +4,7 @@ package proyecto1.modelo;
  *
  * @author JD
  */
-public class Region {
+public class Region implements Comparable<Region> {
     private String codigo;
     private String nombre;
     private double estandar;
@@ -57,6 +57,11 @@ public class Region {
 
     public void setNumEnvios(int numEnvios) {
         this.numEnvios = numEnvios;
+    }
+
+    @Override
+    public int compareTo(Region o) {
+        return (this.getNumEnvios() > o.getNumEnvios()? -1: (this.getNumEnvios() == o.getNumEnvios() ? 0: 1));
     }
     
 }

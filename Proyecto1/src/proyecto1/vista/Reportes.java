@@ -7,7 +7,9 @@ package proyecto1.vista;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import proyecto1.controlador.ControladorCompra;
+import proyecto1.controlador.ControladorRegion;
 import proyecto1.controlador.ControladorUsuario;
+import proyecto1.modelo.Region;
 import proyecto1.modelo.Usuario;
 
 /**
@@ -22,6 +24,7 @@ public class Reportes extends javax.swing.JFrame {
     
     ControladorCompra controladorC = new ControladorCompra();
     ControladorUsuario controladorU = new ControladorUsuario();
+    ControladorRegion controladorR = new ControladorRegion();
     
     public Reportes() {
         initComponents();
@@ -48,7 +51,8 @@ public class Reportes extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         tab = new javax.swing.JTabbedPane();
         panelR = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableR = new javax.swing.JTable();
         panelP = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         lblPaquetes = new javax.swing.JLabel();
@@ -121,23 +125,44 @@ public class Reportes extends javax.swing.JFrame {
 
         tab.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
-        jLabel2.setText("lbl1");
+        tableR.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "NO.", "REGIÓN", "CÓDIGO", "NÚMERO DE ENVÍOS"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tableR);
 
         javax.swing.GroupLayout panelRLayout = new javax.swing.GroupLayout(panelR);
         panelR.setLayout(panelRLayout);
         panelRLayout.setHorizontalGroup(
             panelRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRLayout.createSequentialGroup()
-                .addContainerGap(340, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(297, 297, 297))
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         panelRLayout.setVerticalGroup(
             panelRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRLayout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addComponent(jLabel2)
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addGap(125, 125, 125)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         tab.addTab("tab1", panelR);
@@ -305,6 +330,7 @@ public class Reportes extends javax.swing.JFrame {
     private void btnRegionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegionActionPerformed
         lblTitulo.setText("Lista de regiones con más envíos");
         tab.setSelectedIndex(0);
+        TablaRegion();
     }//GEN-LAST:event_btnRegionActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
@@ -326,6 +352,20 @@ public class Reportes extends javax.swing.JFrame {
                 modeloDatos.setValueAt(user.getUsuario(), i, 2);
                 modeloDatos.setValueAt(user.getPaquetesEnviados(), i, 3);
             }            
+        } 
+    }
+    
+    private void TablaRegion() {
+        DefaultTableModel modelo = new DefaultTableModel(new String[]{"NO.", "REGIÓN", "CÓDIGO", "NÚMERO DE ENVÍOS"}, controladorR.RegionesOdenadas().size());
+        tableR.setModel(modelo);
+        
+        TableModel modeloDatos = tableR.getModel();
+        for(int i = 0; i < controladorR.RegionesOdenadas().size(); i++) {
+            Region region = controladorR.RegionesOdenadas().get(i);
+            modeloDatos.setValueAt(i+1, i, 0);
+            modeloDatos.setValueAt(region.getNombre(), i, 1);
+            modeloDatos.setValueAt(region.getCodigo(), i, 2);
+            modeloDatos.setValueAt(region.getNumEnvios(), i, 3);          
         } 
     }
     
@@ -371,12 +411,12 @@ public class Reportes extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblIngresos;
     private javax.swing.JLabel lblPaquetes;
@@ -386,6 +426,7 @@ public class Reportes extends javax.swing.JFrame {
     private javax.swing.JPanel panelR;
     private javax.swing.JPanel panelU;
     private javax.swing.JTabbedPane tab;
+    private javax.swing.JTable tableR;
     private javax.swing.JTable tableU;
     // End of variables declaration//GEN-END:variables
 }
