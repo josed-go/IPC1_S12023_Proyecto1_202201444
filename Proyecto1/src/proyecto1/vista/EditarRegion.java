@@ -151,7 +151,7 @@ public class EditarRegion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if(!txtPEstandar.getText().isEmpty() && !txtPEspecial.getText().isEmpty() && Integer.parseInt(txtPEstandar.getText()) > 0 && Integer.parseInt(txtPEspecial.getText()) > 0 ) {
+        if(!txtPEstandar.getText().isEmpty() && !txtPEspecial.getText().isEmpty() && Double.parseDouble(txtPEstandar.getText()) > 0 && Double.parseDouble(txtPEspecial.getText()) > 0 ) {
             controladorR.EditarPrecio(txtCodigo.getText(), Double.parseDouble(txtPEstandar.getText()), Double.parseDouble(txtPEspecial.getText()));
             JOptionPane.showMessageDialog(this, "Región editada.");
             this.setVisible(false);
